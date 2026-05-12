@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Radar de Oportunidades</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c1220;--s1:#111c2e;--s2:#162338;--s3:#1c2d45;--s4:#223353;
+  --b1:rgba(148,163,184,.09);--b2:rgba(148,163,184,.17);
+  --t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;
+  --blue:#2563eb;--b2c:#3b82f6;--b3c:#93c5fd;
+  --green:#059669;--g2:#10b981;--g3:#6ee7b7;
+  --purple:#7c3aed;--p2:#8b5cf6;--p3:#c4b5fd;
+  --amber:#d97706;--a2:#f59e0b;--a3:#fcd34d;
+  --red:#dc2626;--r2:#ef4444;--r3:#fca5a5;
+  --tech-c:#2563eb;--tech-bg:rgba(37,99,235,.11);--tech-t:#93c5fd;
+  --trein-c:#059669;--trein-bg:rgba(5,150,105,.11);--trein-t:#6ee7b7;
+  --rh-c:#7c3aed;--rh-bg:rgba(124,58,237,.11);--rh-t:#c4b5fd;
+  --r:8px;--rl:12px;
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:13px;color:var(--t1);background:var(--bg)}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px}
+
+/* ── APP SHELL ── */
+#app{display:flex;height:100vh;overflow:hidden}
+
+/* ── SIDEBAR ── */
+#sb{width:218px;min-width:218px;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;overflow:hidden}
+.brand{padding:15px 14px 12px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:10px}
+.brand-ico{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--b2c));display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;flex-shrink:0}
+.brand-name{font-size:13px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.brand-sub{font-size:10px;color:var(--t3)}
+.ns{padding:10px 12px 3px;font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase}
+.nb{display:flex;align-items:center;gap:8px;padding:7px 10px;margin:1px 7px;border-radius:var(--r);cursor:pointer;color:var(--t2);font-size:12px;font-weight:500;border:none;background:none;width:calc(100% - 14px);text-align:left;transition:all .12s}
+.nb:hover{background:var(--s2);color:var(--t1)}
+.nb.a-all{background:rgba(37,99,235,.14);color:var(--b3c)}
+.nb.a-tech{background:var(--tech-bg);color:var(--tech-t)}
+.nb.a-trein{background:var(--trein-bg);color:var(--trein-t)}
+.nb.a-rh{background:var(--rh-bg);color:var(--rh-t)}
+.nba{margin-left:auto;font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
+.sep{height:1px;background:var(--b1);margin:7px 12px}
+.sf{margin-top:auto;padding:11px 13px;border-top:1px solid var(--b1);font-size:10px;color:var(--t3)}
+.sf-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
+
+/* ── MAIN ── */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── TOPBAR ── */
+#tb{height:50px;min-height:50px;background:var(--s1);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 16px;gap:7px;flex-shrink:0}
+.at{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--b1);background:none;color:var(--t2);transition:all .12s;white-space:nowrap}
+.at:hover{background:var(--s2);color:var(--t1)}
+.at.ta{background:rgba(37,99,235,.13);color:var(--b3c);border-color:rgba(37,99,235,.3)}
+.at.ttech{background:var(--tech-bg);color:var(--tech-t);border-color:rgba(37,99,235,.3)}
+.at.ttrein{background:var(--trein-bg);color:var(--trein-t);border-color:rgba(5,150,105,.3)}
+.at.trh{background:var(--rh-bg);color:var(--rh-t);border-color:rgba(124,58,237,.3)}
+.sp{flex:1}
+.sw{display:flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:0 10px;width:190px;height:32px;transition:border-color .12s}
+.sw:focus-within{border-color:var(--b2c)}
+.sw input{background:none;border:none;outline:none;color:var(--t1);font-size:12px;font-family:'Inter',sans-serif;width:100%}
+.sw input::placeholder{color:var(--t3)}
+.ib{width:32px;height:32px;border-radius:var(--r);border:1px solid var(--b1);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:15px;transition:all .12s;position:relative}
+.ib:hover{background:var(--s2);color:var(--t1)}
+.nd{position:absolute;top:5px;right:5px;width:12px;height:12px;background:var(--r2);border-radius:50%;font-size:7px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;border:1.5px solid var(--s1)}
+
+/* ── CONTENT ── */
+#ct{flex:1;overflow-y:auto;padding:16px 18px}
+
+/* ── SKELETON / LOADING ── */
+.skel{background:linear-gradient(90deg,var(--s2) 25%,var(--s3) 50%,var(--s2) 75%);background-size:200% 100%;animation:skel 1.4s ease infinite;border-radius:var(--r)}
+@keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── HEADER DA ÁREA ── */
+.ah{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.ab2{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:var(--r);font-size:12px;font-weight:500}
+.ah-tit{font-size:15px;font-weight:600}
+.ah-sub{margin-left:auto;font-size:10px;color:var(--t3)}
+.ah-refresh{padding:5px 10px;border-radius:var(--r);border:1px solid var(--b1);background:none;color:var(--t3);font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:'Inter',sans-serif}
+.ah-refresh:hover{background:var(--s2);color:var(--t1)}
+
+/* ── MÉTRICAS ── */
+.mets{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.mc{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:13px 14px;transition:border-color .12s}
+.mc:hover{border-color:var(--b2)}
+.mc-l{font-size:10px;color:var(--t3);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.mc-v{font-size:24px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.mc-s{font-size:10px;color:var(--t3);margin-top:5px}
+
+/* ── FILTROS ── */
+.filt{display:flex;gap:7px;margin-bottom:13px;flex-wrap:wrap;align-items:center}
+.fs{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:6px 9px;color:var(--t2);font-size:11px;font-family:'Inter',sans-serif;outline:none;cursor:pointer;transition:border-color .12s}
+.fs:focus,.fs:hover{border-color:var(--b2)}
+.rc{margin-left:auto;font-size:10px;color:var(--t3);background:var(--s3);border-radius:10px;padding:3px 9px}
+
+/* ── DOIS COLUNAS ── */
+.cols{display:grid;grid-template-columns:1fr 260px;gap:13px}
+.colr{display:flex;flex-direction:column;gap:11px}
+
+/* ── CARD ── */
+.card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:13px}
+.ch{font-size:11px;font-weight:600;color:var(--t2);margin-bottom:11px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.04em}
+
+/* ── OPORTUNIDADES ── */
+.ops{display:flex;flex-direction:column;gap:7px}
+.op{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:12px;cursor:pointer;transition:all .14s}
+.op:hover{background:var(--s3);border-color:var(--b2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.op-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px}
+.op-tit{font-size:12px;font-weight:600;color:var(--t1);line-height:1.4;flex:1}
+.pri{font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap;flex-shrink:0}
+.pA{background:rgba(220,38,38,.18);color:#fca5a5}
+.pM{background:rgba(217,119,6,.18);color:#fcd34d}
+.pB{background:rgba(5,150,105,.16);color:#6ee7b7}
+.op-org{font-size:10px;color:var(--t3);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.op-foot{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tag{font-size:10px;padding:2px 7px;border-radius:10px;background:var(--s4);color:var(--t3);border:1px solid var(--b1);white-space:nowrap}
+.tag-tech {background:var(--tech-bg);color:var(--tech-t);border-color:rgba(37,99,235,.22)}
+.tag-trein{background:var(--trein-bg);color:var(--trein-t);border-color:rgba(5,150,105,.22)}
+.tag-rh   {background:var(--rh-bg);color:var(--rh-t);border-color:rgba(124,58,237,.22)}
+.dias{font-size:10px;color:var(--t3);display:flex;align-items:center;gap:2px}
+.scw{margin-left:auto;display:flex;align-items:center;gap:5px}
+.scn{font-size:11px;font-weight:700;min-width:22px;text-align:right}
+.scb{width:42px;height:3px;background:var(--s4);border-radius:2px;overflow:hidden}
+.scf{height:3px;border-radius:2px}
+.opbtn{width:22px;height:22px;border-radius:5px;border:1px solid var(--b1);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t3);font-size:11px;transition:all .12s;flex-shrink:0}
+.opbtn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.empty{text-align:center;padding:44px 20px;color:var(--t3)}
+.empty i{font-size:40px;display:block;margin-bottom:12px;opacity:.2}
+
+/* ── TIMELINE ── */
+.tl{display:flex;flex-direction:column}
+.tlr{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid var(--b1)}
+.tlr:last-child{border-bottom:none}
+.tld{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.tlb{flex:1;min-width:0}
+.tln{font-size:10px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tls{font-size:9px;color:var(--t3)}
+.tldias{font-size:10px;font-weight:700;white-space:nowrap}
+
+/* ── BARRAS DE ÁREA ── */
+.abr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.abl{font-size:11px;color:var(--t2);width:85px;flex-shrink:0}
+.abt{flex:1;height:5px;background:var(--s4);border-radius:3px;overflow:hidden}
+.abf{height:5px;border-radius:3px;transition:width .6s ease}
+.abn{font-size:10px;color:var(--t3);min-width:22px;text-align:right}
+
+/* ── PAGINAÇÃO ── */
+.pag{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:13px}
+.pbtn{padding:5px 11px;border-radius:var(--r);border:1px solid var(--b1);background:var(--s2);color:var(--t2);cursor:pointer;font-size:11px;transition:all .12s}
+.pbtn:hover{background:var(--s3);color:var(--t1)}
+.pbtn:disabled{opacity:.3;cursor:not-allowed}
+.pinfo{font-size:11px;color:var(--t3)}
+
+/* ── CAPTURA PANEL ── */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pchip{display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid var(--b1);border-radius:var(--r);margin-bottom:6px;background:var(--s3);cursor:pointer;transition:all .12s}
+.pchip.on{background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.35)}
+.pcdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pcn{flex:1;font-size:12px;font-weight:500}
+.pct{font-size:10px;color:var(--t3)}
+.progw{background:var(--s3);border-radius:3px;height:5px;margin-bottom:11px;overflow:hidden}
+.progf{height:5px;background:linear-gradient(90deg,var(--blue),var(--b2c));border-radius:3px;transition:width .4s ease}
+.logbox{background:var(--s4);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;height:180px;overflow-y:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);line-height:1.8}
+.ll{display:block}.ll.ok{color:var(--g3)}.ll.info{color:var(--b3c)}.ll.erro{color:var(--r3)}.ll.aviso{color:var(--a3)}
+.inp{width:100%;background:var(--s3);border:1px solid var(--b1);border-radius:var(--r);padding:7px 10px;color:var(--t1);font-size:12px;font-family:'Inter',sans-serif;outline:none;margin-bottom:10px;transition:border-color .12s}
+.inp:focus{border-color:var(--b2c)}
+.lbl{font-size:10px;color:var(--t3);display:block;margin-bottom:4px}
+.btnp{width:100%;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .12s}
+.btnp:hover{background:#1d4ed8}
+.btnp:disabled{opacity:.4;cursor:not-allowed}
+.btns{padding:8px 13px;background:var(--s3);color:var(--t2);border:1px solid var(--b1);border-radius:var(--r);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:5px;transition:all .12s}
+.btns:hover{background:var(--s4);color:var(--t1)}
+.csr{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--b1);font-size:11px}
+.csr:last-child{border-bottom:none}
+
+/* ── ERROR BANNER ── */
+.err-banner{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);border-radius:var(--rl);padding:14px 16px;margin-bottom:14px;font-size:12px;color:var(--r3)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin .7s linear infinite;display:inline-block}
+@keyframes fi{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.fi{animation:fi .2s ease}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- SIDEBAR -->
+<nav id="sb">
+  <div class="brand">
+    <div class="brand-ico"><i class="ti ti-radar" aria-hidden="true"></i></div>
+    <div>
+      <div class="brand-name">Radar</div>
+      <div class="brand-sub">Oportunidades Inteligentes</div>
+    </div>
+  </div>
+
+  <div style="padding:8px 0 0">
+    <div class="ns">Dashboards</div>
+    <button class="nb a-all"   id="nb-all"   onclick="setArea('all')">  <i class="ti ti-layout-dashboard" style="font-size:15px" aria-hidden="true"></i> Todas as áreas  <span class="nba" id="na-all"   style="background:var(--b2c)">—</span></button>
+    <button class="nb"         id="nb-tech"  onclick="setArea('tech')"> <i class="ti ti-cpu"               style="font-size:15px" aria-hidden="true"></i> Tecnologia      <span class="nba" id="na-tech"  style="background:var(--g2)">—</span></button>
+    <button class="nb"         id="nb-trein" onclick="setArea('trein')"><i class="ti ti-school"             style="font-size:15px" aria-hidden="true"></i> Treinamento     <span class="nba" id="na-trein" style="background:var(--g2)">—</span></button>
+    <button class="nb"         id="nb-rh"    onclick="setArea('rh')">   <i class="ti ti-users"             style="font-size:15px" aria-hidden="true"></i> Programas de RH <span class="nba" id="na-rh"    style="background:var(--p2)">—</span></button>
+  </div>
+
+  <div class="sep"></div>
+
+  <div style="padding:0 0 4px">
+    <div class="ns">Ferramentas</div>
+    <button class="nb" onclick="setView('captura')"><i class="ti ti-refresh"  style="font-size:15px" aria-hidden="true"></i> Atualizar dados</button>
+    <button class="nb" onclick="exportCSV()">       <i class="ti ti-download" style="font-size:15px" aria-hidden="true"></i> Exportar CSV</button>
+  </div>
+
+  <div class="sf">
+    <div><span class="sf-dot" id="sf-dot" style="background:var(--a2)"></span><span id="sf-txt">Carregando...</span></div>
+    <div id="sf-ts" style="margin-top:3px">—</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="tb">
+    <button class="at ta"    id="tab-all"   onclick="setArea('all')">  <i class="ti ti-layout-dashboard" style="font-size:13px" aria-hidden="true"></i> Geral</button>
+    <button class="at"       id="tab-tech"  onclick="setArea('tech')"> <i class="ti ti-cpu"               style="font-size:13px" aria-hidden="true"></i> Tecnologia</button>
+    <button class="at"       id="tab-trein" onclick="setArea('trein')"><i class="ti ti-school"             style="font-size:13px" aria-hidden="true"></i> Treinamento</button>
+    <button class="at"       id="tab-rh"    onclick="setArea('rh')">   <i class="ti ti-users"             style="font-size:13px" aria-hidden="true"></i> Programas de RH</button>
+    <div class="sp"></div>
+    <div class="sw">
+      <i class="ti ti-search" style="font-size:13px;color:var(--t3)" aria-hidden="true"></i>
+      <input placeholder="Buscar edital ou órgão..." id="inp-busca" oninput="dBusca(this.value)" aria-label="Buscar editais"/>
+    </div>
+    <button class="ib" onclick="setView('captura')" title="Atualizar dados">
+      <i class="ti ti-refresh" aria-hidden="true"></i>
+    </button>
+    <button class="ib" title="Alta prioridade">
+      <i class="ti ti-bell" aria-hidden="true"></i>
+      <div class="nd" id="nd">0</div>
+    </button>
+  </div>
+
+  <div id="ct"></div>
+</div>
+</div>
+
+<script>
+// ── ESTADO ───────────────────────────────────────────────────────
+const S = {
+  area: 'all', view: 'dash',
+  pagina: 1, busca: '', pri: '', uf: '',
+  data: null,   // { editais, stats, ufs, capturado_em }
+  loading: false,
+  erro: null,
+};
+
+const ACFG = {
+  all:  { label:'Todas as áreas', c:'var(--b2c)',  bg:'rgba(37,99,235,.12)',  t:'var(--b3c)',   icon:'ti-layout-dashboard' },
+  tech: { label:'Tecnologia',     c:'var(--blue)', bg:'var(--tech-bg)',        t:'var(--tech-t)',icon:'ti-cpu' },
+  trein:{ label:'Treinamento',    c:'var(--g2)',   bg:'var(--trein-bg)',       t:'var(--trein-t)',icon:'ti-school' },
+  rh:   { label:'Programas de RH',c:'var(--p2)',  bg:'var(--rh-bg)',          t:'var(--rh-t)', icon:'ti-users' },
+};
+
+// ── INIT ─────────────────────────────────────────────────────────
+async function init() {
+  renderLoading();
+  await carregar();
+  renderDash();
+}
+
+// ── CARREGAR DADOS DA API ─────────────────────────────────────────
+async function carregar(forcar = false) {
+  if (S.loading) return;
+  S.loading = true; S.erro = null;
+  setSfStatus('Buscando no PNCP...', 'var(--a2)');
+
+  try {
+    const url = `/api/editais?limite=500&dias=30${forcar ? '&_='+Date.now() : ''}`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const d = await r.json();
+
+    if (d.erro) throw new Error(d.detalhe || d.erro);
+
+    S.data = d;
+    atualizarBadges(d.stats);
+    setSfStatus('Dados atualizados', 'var(--g2)');
+    const ts = d.capturado_em ? new Date(d.capturado_em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : '—';
+    document.getElementById('sf-ts').textContent = 'Capturado às '+ts;
+  } catch(e) {
+    S.erro = e.message;
+    setSfStatus('Erro de conexão', 'var(--r2)');
+  } finally {
+    S.loading = false;
+  }
+}
+
+function setSfStatus(txt, cor) {
+  document.getElementById('sf-dot').style.background = cor;
+  document.getElementById('sf-txt').textContent = txt;
+}
+
+function atualizarBadges(st) {
+  if (!st) return;
+  document.getElementById('na-all').textContent   = st.total       || 0;
+  document.getElementById('na-tech').textContent  = st.tecnologia  || 0;
+  document.getElementById('na-trein').textContent = st.treinamento || 0;
+  document.getElementById('na-rh').textContent    = st.rh          || 0;
+  document.getElementById('nd').textContent       = st.alta        || 0;
+}
+
+// ── NAVEGAÇÃO ─────────────────────────────────────────────────────
+function setArea(a) {
+  S.area = a; S.pagina = 1; S.view = 'dash';
+  ['all','tech','trein','rh'].forEach(k => {
+    document.getElementById('nb-'+k).className   = 'nb'+(k===a?' a-'+a:'');
+    document.getElementById('tab-'+k).className  = 'at'+(k===a?' t'+a:'');
+  });
+  renderDash();
+}
+
+function setView(v) {
+  S.view = v;
+  v === 'captura' ? renderCaptura() : renderDash();
+}
+
+// ── FILTRAR EDITAIS ───────────────────────────────────────────────
+function filtrar() {
+  if (!S.data?.editais) return [];
+  let d = S.data.editais;
+  if (S.area !== 'all') d = d.filter(e => e.area === S.area);
+  if (S.pri)   d = d.filter(e => e.prioridade === S.pri);
+  if (S.uf)    d = d.filter(e => e.uf === S.uf);
+  if (S.busca) {
+    const q = S.busca.toLowerCase();
+    d = d.filter(e => e.objeto.toLowerCase().includes(q) || (e.orgao||'').toLowerCase().includes(q));
+  }
+  return d;
+}
+
+// ── RENDER LOADING ────────────────────────────────────────────────
+function renderLoading() {
+  document.getElementById('ct').innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
+      ${[1,2,3,4].map(()=>`<div class="mc"><div class="skel" style="height:11px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:28px;width:40%"></div></div>`).join('')}
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;padding:60px;color:var(--t3)">
+      <i class="ti ti-refresh spin" aria-hidden="true" style="font-size:24px;margin-right:10px"></i>
+      Capturando editais do PNCP em tempo real...
+    </div>`;
+}
+
+// ── RENDER DASHBOARD ──────────────────────────────────────────────
+function renderDash() {
+  if (S.loading && !S.data) { renderLoading(); return; }
+
+  const A    = ACFG[S.area];
+  const st   = S.data?.stats || {};
+  const ufs  = S.data?.ufs   || [];
+  const todos = filtrar();
+
+  // Paginar
+  const PG  = 16;
+  const pag = S.pagina;
+  const totalPags = Math.ceil(todos.length / PG);
+  const page = todos.slice((pag-1)*PG, pag*PG);
+
+  // Métricas da área ativa
+  const nArea  = S.area==='all' ? st.total : (S.area==='tech'?st.tecnologia:S.area==='trein'?st.treinamento:st.rh) || 0;
+  const nAlta  = todos.filter(e=>e.prioridade==='Alta').length;
+  const nUrg   = todos.filter(e=>diasAte(e.data_encerramento)<=7&&diasAte(e.data_encerramento)>=0).length;
+  const nNovos = todos.filter(e=>e.data_publicacao&&e.data_publicacao>=dHa(7)).length;
+
+  document.getElementById('ct').innerHTML = `
+    ${S.erro ? `<div class="err-banner"><i class="ti ti-alert-triangle" aria-hidden="true"></i> ${S.erro} — <a href="#" onclick="recarregar()" style="color:var(--b3c)">tentar novamente</a></div>` : ''}
+
+    <div class="ah">
+      <div class="ab2" style="background:${A.bg};color:${A.t}"><i class="ti ${A.icon}" aria-hidden="true" style="font-size:14px"></i> ${A.label}</div>
+      <span class="ah-tit">${todos.length} oportunidades</span>
+      <button class="ah-refresh" onclick="recarregar()"><i class="ti ti-refresh" aria-hidden="true" style="${S.loading?'animation:spin .7s linear infinite':''}"></i> Atualizar</button>
+      <span class="ah-sub">PNCP · ${S.data?.capturado_em ? new Date(S.data.capturado_em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : 'carregando...'}</span>
+    </div>
+
+    <div class="mets">
+      <div class="mc"><div class="mc-l">Editais ${S.area==='all'?'totais':A.label.toLowerCase()}</div><div class="mc-v" style="color:${A.c}">${nArea||0}</div><div class="mc-s">capturados do PNCP</div></div>
+      <div class="mc"><div class="mc-l">Alta prioridade</div><div class="mc-v" style="color:var(--r3)">${nAlta}</div><div class="mc-s">score de relevância alto</div></div>
+      <div class="mc"><div class="mc-l">Prazo urgente</div><div class="mc-v" style="color:var(--a3)">${nUrg}</div><div class="mc-s">encerram em ≤ 7 dias</div></div>
+      <div class="mc"><div class="mc-l">Publicados recentes</div><div class="mc-v" style="color:var(--g3)">${nNovos}</div><div class="mc-s">nos últimos 7 dias</div></div>
+    </div>
+
+    <div class="filt">
+      <select class="fs" onchange="S.pri=this.value;S.pagina=1;renderDash()">
+        <option value="">Toda prioridade</option>
+        <option value="Alta" ${S.pri==='Alta'?'selected':''}>Alta</option>
+        <option value="Média" ${S.pri==='Média'?'selected':''}>Média</option>
+        <option value="Baixa" ${S.pri==='Baixa'?'selected':''}>Baixa</option>
+      </select>
+      <select class="fs" onchange="S.uf=this.value;S.pagina=1;renderDash()">
+        <option value="">Todos os estados</option>
+        ${ufs.map(u=>`<option ${S.uf===u?'selected':''}>${u}</option>`).join('')}
+      </select>
+      ${S.area==='all'?`<select class="fs" onchange="if(this.value)setArea(this.value)">
+        <option value="">Filtrar por área</option>
+        <option value="tech">Tecnologia</option>
+        <option value="trein">Treinamento</option>
+        <option value="rh">Programas de RH</option>
+      </select>`:''}
+      <button class="btns" onclick="setView('captura')"><i class="ti ti-radar" aria-hidden="true"></i> Capturar</button>
+      <span class="rc">${todos.length} resultados</span>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="ops fi" id="ops-list">
+          ${page.length ? page.map(opCard).join('') : emptyState()}
+        </div>
+        ${totalPags>1 ? paginacao(pag, totalPags) : ''}
+      </div>
+      <div class="colr">
+        <div class="card">
+          <div class="ch"><i class="ti ti-clock" aria-hidden="true"></i> Prazos próximos</div>
+          ${renderTL(todos)}
+        </div>
+        <div class="card">
+          <div class="ch"><i class="ti ti-chart-bar" aria-hidden="true"></i> Por área</div>
+          ${renderBarras(st)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function opCard(op) {
+  const pc  = {Alta:'pA',Média:'pM',Baixa:'pB'}[op.prioridade]||'pB';
+  const dias = diasAte(op.data_encerramento);
+  const sc  = op.score||0;
+  const scC = sc>=30?'var(--r3)':sc>=13?'var(--a3)':'var(--g3)';
+  const tc  = {tecnologia:'tag-tech',treinamento:'tag-trein',rh:'tag-rh'}[op.area]||'';
+  const kws = Array.isArray(op.palavras_chave) ? op.palavras_chave : [];
+  const A   = ACFG[op.area]||ACFG.all;
+  return `<div class="op fi">
+    <div class="op-top">
+      <div class="op-tit">${esc(op.objeto)}</div>
+      <span class="pri ${pc}">${op.prioridade}</span>
+    </div>
+    <div class="op-org" title="${esc(op.orgao||'')} ${op.municipio?'— '+op.municipio:''}">${esc(op.orgao||'—')}${op.uf?' · '+op.uf:''}</div>
+    <div class="op-foot">
+      <span class="tag ${tc}">${A.label}</span>
+      ${op.modalidade?`<span class="tag">${op.modalidade.length>20?op.modalidade.substring(0,18)+'…':op.modalidade}</span>`:''}
+      <span class="dias"><i class="ti ti-calendar" aria-hidden="true" style="font-size:10px"></i> ${dias>=0?dias+'d':'encerrado'}</span>
+      ${kws[0]?`<span class="tag" style="opacity:.75">${kws[0]}</span>`:''}
+      <div class="scw">
+        <span class="scn" style="color:${scC}">${sc}</span>
+        <div class="scb"><div class="scf" style="width:${Math.min(sc*2.5,100)}%;background:${scC}"></div></div>
+        ${op.link?`<button class="opbtn" onclick="window.open('${esc(op.link)}','_blank')" title="Ver edital no PNCP"><i class="ti ti-external-link" aria-hidden="true"></i></button>`:''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function emptyState() {
+  const msg = S.data ? 'Nenhum resultado para os filtros selecionados.' : S.erro ? 'Erro ao carregar dados.' : 'Execute uma captura.';
+  return `<div class="empty"><i class="ti ti-search" aria-hidden="true"></i>${msg}<br><br>
+    <button class="btnp" style="width:auto;padding:8px 20px;margin:auto" onclick="setView('captura')">
+      <i class="ti ti-radar" aria-hidden="true"></i> Capturar agora
+    </button></div>`;
+}
+
+function paginacao(pag, total) {
+  return `<div class="pag">
+    <button class="pbtn" ${pag<=1?'disabled':''} onclick="S.pagina--;renderDash()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Anterior</button>
+    <span class="pinfo">Página ${pag} de ${total}</span>
+    <button class="pbtn" ${pag>=total?'disabled':''} onclick="S.pagina++;renderDash()">Próxima <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+  </div>`;
+}
+
+function renderTL(editais) {
+  const sorted = [...editais].filter(e=>diasAte(e.data_encerramento)>=0).sort((a,b)=>diasAte(a.data_encerramento)-diasAte(b.data_encerramento)).slice(0,8);
+  if (!sorted.length) return '<div style="font-size:11px;color:var(--t3);padding:4px 0">Nenhum prazo ativo.</div>';
+  return '<div class="tl">'+sorted.map(e=>{
+    const d  = diasAte(e.data_encerramento);
+    const c  = d<=7?'var(--r2)':d<=15?'var(--a2)':'var(--g2)';
+    return `<div class="tlr"><div class="tld" style="background:${c}"></div>
+      <div class="tlb"><div class="tln">${esc((e.objeto||'').substring(0,42))}…</div>
+      <div class="tls">${esc(e.orgao||'')}${e.uf?' · '+e.uf:''} · ${fmtD(e.data_encerramento)}</div></div>
+      <div class="tldias" style="color:${c}">${d}d</div></div>`;
+  }).join('')+'</div>';
+}
+
+function renderBarras(st) {
+  const cfgs = [
+    {l:'Tecnologia', c:'var(--b2c)',  n:st.tecnologia ||0},
+    {l:'Treinamento',c:'var(--g2)',   n:st.treinamento||0},
+    {l:'RH',         c:'var(--p2)',   n:st.rh         ||0},
+  ];
+  const max = Math.max(...cfgs.map(c=>c.n), 1);
+  return cfgs.map(c=>`<div class="abr">
+    <span class="abl">${c.l}</span>
+    <div class="abt"><div class="abf" style="width:${Math.round(c.n/max*100)}%;background:${c.c}"></div></div>
+    <span class="abn">${c.n}</span>
+  </div>`).join('');
+}
+
+// ── RENDER CAPTURA ────────────────────────────────────────────────
+function renderCaptura() {
+  document.getElementById('ct').innerHTML = `
+    <div class="cg">
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <div class="ch"><i class="ti ti-world" aria-hidden="true"></i> Portais configurados</div>
+          <div class="pchip on"><div class="pcdot" style="background:var(--g2)"></div><div><div class="pcn">PNCP — Portal Nacional</div><div class="pct">API pública · sem autenticação · endpoint /contratacoes/publicacao</div></div><i class="ti ti-check" style="color:var(--b3c);margin-left:auto" aria-hidden="true"></i></div>
+          <div class="pchip on"><div class="pcdot" style="background:var(--g2)"></div><div><div class="pcn">PNCP — Propostas abertas</div><div class="pct">API pública · endpoint /contratacoes/proposta</div></div><i class="ti ti-check" style="color:var(--b3c);margin-left:auto" aria-hidden="true"></i></div>
+        </div>
+        <div class="card">
+          <div class="ch"><i class="ti ti-tags" aria-hidden="true"></i> Áreas monitoradas</div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="padding:9px 11px;border-radius:var(--r);background:var(--tech-bg);border:1px solid rgba(37,99,235,.22)">
+              <div style="font-size:11px;font-weight:600;color:var(--tech-t);margin-bottom:3px"><i class="ti ti-cpu" aria-hidden="true"></i> Tecnologia</div>
+              <div style="font-size:10px;color:var(--t3);line-height:1.6">software · sistema de informação · TI · cloud · cibersegurança · inteligência artificial · suporte técnico · licença de software · hardware · data center · infraestrutura · BI · machine learning…</div>
+            </div>
+            <div style="padding:9px 11px;border-radius:var(--r);background:var(--trein-bg);border:1px solid rgba(5,150,105,.22)">
+              <div style="font-size:11px;font-weight:600;color:var(--trein-t);margin-bottom:3px"><i class="ti ti-school" aria-hidden="true"></i> Treinamento</div>
+              <div style="font-size:10px;color:var(--t3);line-height:1.6">treinamento · capacitação · curso · EAD · e-learning · LMS · certificação · workshop · educação corporativa · seminário · trilha de aprendizagem · moodle…</div>
+            </div>
+            <div style="padding:9px 11px;border-radius:var(--r);background:var(--rh-bg);border:1px solid rgba(124,58,237,.22)">
+              <div style="font-size:11px;font-weight:600;color:var(--rh-t);margin-bottom:3px"><i class="ti ti-users" aria-hidden="true"></i> Programas de RH</div>
+              <div style="font-size:10px;color:var(--t3);line-height:1.6">recursos humanos · recrutamento e seleção · processo seletivo · coaching · clima organizacional · cultura organizacional · diversidade e inclusão · avaliação de desempenho · headhunting…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <div class="ch"><i class="ti ti-adjustments" aria-hidden="true"></i> Parâmetros de busca</div>
+          <label class="lbl">Dias retroativos (período de busca no PNCP)</label>
+          <input class="inp" type="number" id="p-dias" value="30" min="1" max="90"/>
+          <label class="lbl">Máximo de páginas por captura</label>
+          <input class="inp" type="number" id="p-pags" value="8" min="1" max="20"/>
+          <div style="font-size:10px;color:var(--t3);margin-bottom:12px">Cada página = até 500 editais do PNCP. 8 páginas = até 4.000 analisados.</div>
+          <div style="display:flex;gap:8px">
+            <button class="btnp" id="btn-cap" onclick="executarCaptura()">
+              <i class="ti ti-player-play" aria-hidden="true"></i> Atualizar dados agora
+            </button>
+            <button class="btns" onclick="setArea('all')"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch"><i class="ti ti-activity" aria-hidden="true"></i> Log de execução</div>
+          <div class="progw"><div class="progf" id="pg" style="width:0%"></div></div>
+          <div class="logbox" id="logbox"><span class="ll">Aguardando execução...</span></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── EXECUTAR CAPTURA VIA SSE ──────────────────────────────────────
+async function executarCaptura() {
+  const btn = document.getElementById('btn-cap');
+  if (btn) btn.disabled = true;
+  const lb  = document.getElementById('logbox');
+  if (lb) lb.innerHTML = '';
+
+  const log = (msg, n) => {
+    if (!lb) return;
+    const el = document.createElement('span');
+    el.className = 'll '+(n||'');
+    el.textContent = `[${new Date().toLocaleTimeString('pt-BR')}] ${msg}\n`;
+    lb.appendChild(el); lb.scrollTop = lb.scrollHeight;
+  };
+  const prog = p => { const el=document.getElementById('pg'); if(el) el.style.width=p+'%'; };
+
+  log('Conectando ao servidor Vercel...','info');
+  prog(5);
+
+  try {
+    const r = await fetch('/api/capturar', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        dias:    parseInt(document.getElementById('p-dias')?.value||30),
+        maxpags: parseInt(document.getElementById('p-pags')?.value||8),
+      }),
+    });
+
+    if (!r.ok) { log('Erro HTTP '+r.status,'erro'); return; }
+
+    // Ler SSE stream
+    const reader = r.body.getReader();
+    const dec    = new TextDecoder();
+    let buf      = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const parts = buf.split('\n\n');
+      buf = parts.pop();
+
+      for (const part of parts) {
+        if (!part.startsWith('data:')) continue;
+        try {
+          const d = JSON.parse(part.slice(5).trim());
+          if (d.tipo === 'log')       { log(d.msg, d.nivel); }
+          if (d.tipo === 'concluido') {
+            prog(100);
+            log(`Captura concluída — ${d.total} editais relevantes`, 'ok');
+            // Recarregar dados no dashboard
+            await carregar(true);
+            setTimeout(() => setArea('all'), 500);
+          }
+          if (d.tipo === 'erro') { log(d.msg, 'erro'); }
+
+          // Progresso aproximado
+          if (d.msg?.includes('página')) prog(Math.min(80, parseInt(document.getElementById('pg')?.style.width||0)+10));
+        } catch {}
+      }
+    }
+  } catch(e) {
+    log('Erro: '+e.message,'erro');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+// ── EXPORT CSV ────────────────────────────────────────────────────
+async function exportCSV() {
+  const d = filtrar();
+  if (!d.length) { alert('Nenhum dado para exportar. Execute uma captura primeiro.'); return; }
+  const h = ['Objeto','Órgão','UF','Município','Área','Modalidade','Prazo','Valor Estimado','Score','Prioridade','Palavras-chave','Link'];
+  const rows = d.map(e=>[
+    e.objeto, e.orgao||'', e.uf||'', e.municipio||'',
+    {tecnologia:'Tecnologia',treinamento:'Treinamento',rh:'Programas de RH'}[e.area]||e.area||'',
+    e.modalidade||'', e.data_encerramento||'', e.valor||0,
+    e.score||0, e.prioridade||'',
+    (Array.isArray(e.palavras_chave)?e.palavras_chave:[]).join('; '),
+    e.link||'',
+  ]);
+  const csv = [h,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  a.download = 'radar-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+
+// ── UTILS ─────────────────────────────────────────────────────────
+async function recarregar() { await carregar(true); renderDash(); }
+function diasAte(d) { if(!d) return -1; return Math.round((new Date(d+'T23:59:59')-new Date())/86400000); }
+function fmtD(d)    { if(!d) return '—'; return new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}); }
+function dHa(n)     { const d=new Date(); d.setDate(d.getDate()-n); return d.toISOString().slice(0,10); }
+function esc(s)     { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+let dbt = null;
+function dBusca(v) { clearTimeout(dbt); dbt = setTimeout(()=>{ S.busca=v; S.pagina=1; if(S.view==='dash') renderDash(); },300); }
+
+init();
+</script>
+</body>
+</html>

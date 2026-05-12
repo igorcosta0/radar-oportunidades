@@ -1,0 +1,6 @@
+{
+  "name": "radar-oportunidades",
+  "version": "1.0.0",
+  "description": "Radar de Oportunidades — captura PNCP classificada por Tecnologia, Treinamento e RH",
+  "engines": { "node": ">=18.x" }
+}

@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "buildCommand": "echo 'ok'",
+  "outputDirectory": "public",
+  "functions": {
+    "api/*.js": {
+      "memory": 512,
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/api/editais",  "destination": "/api/editais.js" },
+    { "source": "/api/capturar", "destination": "/api/capturar.js" },
+    { "source": "/api/cron",     "destination": "/api/cron.js" },
+    { "source": "/(.*)",         "destination": "/index.html" }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "0 6 * * *"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin",  "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    }
+  ]
+}
