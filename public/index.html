@@ -240,13 +240,17 @@ const KW = {
   },
 };
 
-// Termos enviados à API (um por vez)
-const TERMOS = [
-  'software','tecnologia da informação','sistema de informação',
-  'suporte tecnico','licenca de software','equipamento informatica',
-  'treinamento','capacitacao','curso','e-learning','educacao corporativa',
-  'recursos humanos','recrutamento','gestao de pessoas','coaching',
-];
+// ── CLOUDFLARE WORKER ────────────────────────────────────────────
+const WORKER = 'https://radar-pncp.igorecosta1.workers.dev';
+
+async function buscarPNCP(dias = 3) {
+  const r = await fetch(`${WORKER}?dias=${dias}&maxpags=1`, {
+    signal: AbortSignal.timeout(30000)
+  });
+  if (!r.ok) throw new Error(`Worker HTTP ${r.status}`);
+  const j = await r.json();
+  return Array.isArray(j?.data) ? j.data : [];
+}
 
 // ── CLASSIFICAÇÃO ─────────────────────────────────────────────────
 function classificar(texto){
@@ -265,37 +269,23 @@ function classificar(texto){
 }
 function prioridade(s){return s>=30?'Alta':s>=13?'Média':'Baixa';}
 
-// ── API compras.dados.gov.br ──────────────────────────────────────
-async function buscarTermo(termo, offset = 0) {
-  const alvo = `https://compras.dados.gov.br/licitacoes/v1/licitacoes.json?descricao_objeto=${encodeURIComponent(termo)}&offset=${offset}`;
-  const proxies = [
-    u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
-    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-    u => `https://proxy.cors.sh/${u}`,
-  ];
-  for (const proxy of proxies) {
-    try {
-      const r = await fetch(proxy(alvo), { signal: AbortSignal.timeout(12000) });
-      if (!r.ok) continue;
-      const j = await r.json();
-      return Array.isArray(j) ? j : [];
-    } catch { continue; }
-  }
-  throw new Error('Todos os proxies falharam');
-}
+// (busca via Worker Cloudflare — ver função buscarPNCP acima)
 
 function normalizar(raw){
+  const org=raw.orgaoEntidade||{};
+  const uni=raw.unidadeOrgao||{};
+  const num=raw.numeroControlePNCP||`${org.cnpj||'x'}-${raw.anoCompra}-${raw.sequencialCompra}`;
   return{
-    id:raw.identificador||raw.numero||String(Math.random()),
-    objeto:(raw.descricao_objeto||raw.objeto||'').trim(),
-    orgao:raw.unidade_gestora?.nome_resumido||raw.orgao?.nome||'',
-    uf:raw.unidade_gestora?.uf||'',
-    municipio:raw.municipio||'',
-    modalidade:raw.modalidade?.descricao||'',
-    valor:parseFloat(raw.valor_estimado||raw.valor_licitacao||0)||0,
-    data_publicacao:(raw.data_publicacao_edital||'').slice(0,10),
-    data_encerramento:(raw.data_entrega_proposta||raw.data_abertura||'').slice(0,10),
-    link:raw.link||`https://compras.dados.gov.br/licitacoes/doc/licitacao/${raw.identificador}`,
+    id:num,
+    objeto:(raw.objetoCompra||'').trim(),
+    orgao:org.razaoSocial||uni.nomeUnidade||'',
+    uf:uni.ufSigla||'',
+    municipio:uni.municipioNome||'',
+    modalidade:raw.modalidadeNome||'',
+    valor:raw.valorTotalEstimado||0,
+    data_publicacao:(raw.dataPublicacaoPncp||'').slice(0,10),
+    data_encerramento:(raw.dataEncerramentoProposta||raw.dataAberturaProposta||'').slice(0,10),
+    link:raw.linkSistemaOrigem||`https://pncp.gov.br/app/editais/${num}`,
   };
 }
 
@@ -445,14 +435,16 @@ function renderCaptura(){
           <div class="ch"><i class="ti ti-world" aria-hidden="true"></i> Fonte de dados</div>
           <div style="display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(5,150,105,.3);border-radius:var(--r);background:rgba(5,150,105,.08)">
             <div style="width:8px;height:8px;border-radius:50%;background:var(--g2);flex-shrink:0"></div>
-            <div><div style="font-size:12px;font-weight:500">compras.dados.gov.br</div><div style="font-size:10px;color:var(--t3)">API aberta · busca por texto · sem bloqueio de IP</div></div>
+            <div><div style="font-size:12px;font-weight:500">PNCP via Cloudflare Worker</div><div style="font-size:10px;color:var(--t3)">IP brasileiro · CORS liberado · dados reais</div></div>
             <i class="ti ti-check" aria-hidden="true" style="font-size:13px;color:var(--g3);margin-left:auto"></i>
           </div>
         </div>
         <div class="card">
-          <div class="ch"><i class="ti ti-tags" aria-hidden="true"></i> Termos buscados (${TERMOS.length})</div>
+          <div class="ch"><i class="ti ti-tags" aria-hidden="true"></i> Áreas monitoradas</div>
           <div style="display:flex;flex-wrap:wrap;gap:5px">
-            ${TERMOS.map(t=>`<span style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--s3);color:var(--t2);border:1px solid var(--b1)">${t}</span>`).join('')}
+            <span style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--tech-bg);color:var(--tech-t);border:1px solid rgba(37,99,235,.22)">Tecnologia</span>
+            <span style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--trein-bg);color:var(--trein-t);border:1px solid rgba(5,150,105,.22)">Treinamento</span>
+            <span style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--rh-bg);color:var(--rh-t);border:1px solid rgba(124,58,237,.22)">Programas de RH</span>
           </div>
         </div>
       </div>
@@ -496,60 +488,49 @@ async function executarCaptura(){
   };
   const prog=p=>{const el=document.getElementById('pg');if(el)el.style.width=p+'%';};
 
-  log('Iniciando captura via compras.dados.gov.br...','info');
-  log(`Buscando ${TERMOS.length} termos...`,'info');
-  prog(5);
+  log('Conectando ao Worker Cloudflare (IP brasileiro)...','info');
+  prog(10);
 
-  const brutos=[],vistos=new Set();
-  for(let i=0;i<TERMOS.length;i++){
-    const termo=TERMOS[i];
-    log(`Buscando: "${termo}"...`,'info');
-    try{
-      const items=await buscarTermo(termo);
-      let novos=0;
-      for(const it of items){
-        const id=it.identificador||it.numero||(it.descricao_objeto||'').slice(0,60);
-        if(!vistos.has(id)){vistos.add(id);brutos.push(it);novos++;}
-      }
-      log(`"${termo}": ${novos} editais`,'ok');
-    }catch(e){log(`"${termo}": ${e.message}`,'aviso');}
-    prog(5+Math.round((i+1)/TERMOS.length*65));
-    await new Promise(r=>setTimeout(r,400));
+  try{
+    log('Buscando editais no PNCP...','info');
+    const brutos=await buscarPNCP(3);
+    prog(60);
+    log(`PNCP retornou ${brutos.length} editais. Classificando...`,'info');
+
+    S.editais=[];let tech=0,trein=0,rh=0;
+    for(const raw of brutos){
+      const item=normalizar(raw);
+      if(!item.objeto)continue;
+      const cl=classificar(item.objeto);
+      if(!cl)continue;
+      S.editais.push({...item,area:cl.area,score:cl.score,prioridade:prioridade(cl.score),palavras:cl.palavras});
+      if(cl.area==='tecnologia')tech++;
+      else if(cl.area==='treinamento')trein++;
+      else if(cl.area==='rh')rh++;
+    }
+
+    S.editais.sort((a,b)=>b.score-a.score);
+    S.capturado_em=new Date().toISOString();
+    S.stats={total:S.editais.length,tecnologia:tech,treinamento:trein,rh,alta:S.editais.filter(e=>e.prioridade==='Alta').length};
+
+    prog(100);
+    log(`Tecnologia   : ${tech}`,'ok');
+    log(`Treinamento  : ${trein}`,'ok');
+    log(`Programas RH : ${rh}`,'ok');
+    log(`Total relevante: ${S.editais.length} de ${brutos.length}`,'ok');
+
+    document.getElementById('na-all').textContent=S.editais.length;
+    document.getElementById('na-tech').textContent=tech;
+    document.getElementById('na-trein').textContent=trein;
+    document.getElementById('na-rh').textContent=rh;
+    document.getElementById('nd').textContent=S.stats.alta||0;
+    document.getElementById('sf-dot').style.background='var(--g2)';
+    document.getElementById('sf-txt').textContent=S.editais.length+' oportunidades';
+    document.getElementById('sf-ts').textContent='Capturado às '+new Date().toLocaleTimeString('pt-BR');
+
+  }catch(e){
+    log(`Erro: ${e.message}`,'erro');
   }
-
-  log(`Total: ${brutos.length} editais únicos. Classificando...`,'info');
-  prog(75);
-
-  S.editais=[];let tech=0,trein=0,rh=0;
-  for(const raw of brutos){
-    const item=normalizar(raw);
-    if(!item.objeto)continue;
-    const cl=classificar(item.objeto);
-    if(!cl)continue;
-    S.editais.push({...item,area:cl.area,score:cl.score,prioridade:prioridade(cl.score),palavras:cl.palavras});
-    if(cl.area==='tecnologia')tech++;
-    else if(cl.area==='treinamento')trein++;
-    else if(cl.area==='rh')rh++;
-  }
-
-  S.editais.sort((a,b)=>b.score-a.score);
-  S.capturado_em=new Date().toISOString();
-  S.stats={total:S.editais.length,tecnologia:tech,treinamento:trein,rh,alta:S.editais.filter(e=>e.prioridade==='Alta').length};
-
-  prog(100);
-  log(`Tecnologia   : ${tech}`,'ok');
-  log(`Treinamento  : ${trein}`,'ok');
-  log(`Programas RH : ${rh}`,'ok');
-  log(`Total relevante: ${S.editais.length} de ${brutos.length}`,'ok');
-
-  document.getElementById('na-all').textContent=S.editais.length;
-  document.getElementById('na-tech').textContent=tech;
-  document.getElementById('na-trein').textContent=trein;
-  document.getElementById('na-rh').textContent=rh;
-  document.getElementById('nd').textContent=S.stats.alta||0;
-  document.getElementById('sf-dot').style.background='var(--g2)';
-  document.getElementById('sf-txt').textContent=S.editais.length+' oportunidades';
-  document.getElementById('sf-ts').textContent='Capturado às '+new Date().toLocaleTimeString('pt-BR');
 
   if(btn)btn.disabled=false;
   setTimeout(()=>{S.view='dash';setArea('all');},800);
