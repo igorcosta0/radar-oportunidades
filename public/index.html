@@ -25,10 +25,7 @@
 html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:13px;color:var(--t1);background:var(--bg)}
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px}
-
 #app{display:flex;height:100vh;overflow:hidden}
-
-/* SIDEBAR */
 #sb{width:218px;min-width:218px;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column}
 .brand{padding:15px 14px 12px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:10px}
 .brand-ico{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--b2c));display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;flex-shrink:0}
@@ -45,8 +42,6 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .sep{height:1px;background:var(--b1);margin:7px 12px}
 .sf{margin-top:auto;padding:11px 13px;border-top:1px solid var(--b1);font-size:10px;color:var(--t3)}
 .sf-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
-
-/* MAIN */
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 #tb{height:50px;min-height:50px;background:var(--s1);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 16px;gap:7px;flex-shrink:0}
 .at{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--b1);background:none;color:var(--t2);transition:all .12s;white-space:nowrap}
@@ -63,29 +58,21 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .ib{width:32px;height:32px;border-radius:var(--r);border:1px solid var(--b1);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:15px;transition:all .12s;position:relative}
 .ib:hover{background:var(--s2);color:var(--t1)}
 .nd{position:absolute;top:5px;right:5px;width:12px;height:12px;background:var(--r2);border-radius:50%;font-size:7px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;border:1.5px solid var(--s1)}
-
 #ct{flex:1;overflow-y:auto;padding:16px 18px}
-
-/* MÉTRICAS */
 .mets{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
 .mc{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:13px 14px;transition:border-color .12s}
 .mc:hover{border-color:var(--b2)}
 .mc-l{font-size:10px;color:var(--t3);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
 .mc-v{font-size:24px;font-weight:700;line-height:1;letter-spacing:-.03em}
 .mc-s{font-size:10px;color:var(--t3);margin-top:5px}
-
-/* FILTROS */
 .filt{display:flex;gap:7px;margin-bottom:13px;flex-wrap:wrap;align-items:center}
 .fs{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:6px 9px;color:var(--t2);font-size:11px;font-family:'Inter',sans-serif;outline:none;cursor:pointer}
 .fs:hover,.fs:focus{border-color:var(--b2)}
 .rc{margin-left:auto;font-size:10px;color:var(--t3);background:var(--s3);border-radius:10px;padding:3px 9px}
-
 .cols{display:grid;grid-template-columns:1fr 260px;gap:13px}
 .colr{display:flex;flex-direction:column;gap:11px}
 .card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:13px}
 .ch{font-size:11px;font-weight:600;color:var(--t2);margin-bottom:11px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.04em}
-
-/* OPORTUNIDADES */
 .ops{display:flex;flex-direction:column;gap:7px}
 .op{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:12px;cursor:pointer;transition:all .14s}
 .op:hover{background:var(--s3);border-color:var(--b2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
@@ -110,8 +97,6 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .opbtn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
 .empty{text-align:center;padding:44px 20px;color:var(--t3)}
 .empty i{font-size:40px;display:block;margin-bottom:12px;opacity:.2}
-
-/* TIMELINE */
 .tl{display:flex;flex-direction:column}
 .tlr{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid var(--b1)}
 .tlr:last-child{border-bottom:none}
@@ -120,20 +105,16 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .tln{font-size:10px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tls{font-size:9px;color:var(--t3)}
 .tldias{font-size:10px;font-weight:700;white-space:nowrap}
-
 .abr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .abl{font-size:11px;color:var(--t2);width:85px;flex-shrink:0}
 .abt{flex:1;height:5px;background:var(--s4);border-radius:3px;overflow:hidden}
 .abf{height:5px;border-radius:3px;transition:width .6s ease}
 .abn{font-size:10px;color:var(--t3);min-width:22px;text-align:right}
-
 .pag{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:13px}
 .pbtn{padding:5px 11px;border-radius:var(--r);border:1px solid var(--b1);background:var(--s2);color:var(--t2);cursor:pointer;font-size:11px;transition:all .12s}
 .pbtn:hover{background:var(--s3);color:var(--t1)}
 .pbtn:disabled{opacity:.3;cursor:not-allowed}
 .pinfo{font-size:11px;color:var(--t3)}
-
-/* CAPTURA */
 .progw{background:var(--s3);border-radius:3px;height:5px;margin-bottom:11px;overflow:hidden}
 .progf{height:5px;background:linear-gradient(90deg,var(--blue),var(--b2c));border-radius:3px;transition:width .4s ease}
 .logbox{background:var(--s4);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;height:200px;overflow-y:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);line-height:1.8}
@@ -142,9 +123,6 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .ll.info {color:var(--b3c)}
 .ll.erro {color:var(--r3)}
 .ll.aviso{color:var(--a3)}
-.inp{width:100%;background:var(--s3);border:1px solid var(--b1);border-radius:var(--r);padding:7px 10px;color:var(--t1);font-size:12px;font-family:'Inter',sans-serif;outline:none;margin-bottom:10px;transition:border-color .12s}
-.inp:focus{border-color:var(--b2c)}
-.lbl{font-size:10px;color:var(--t3);display:block;margin-bottom:4px}
 .btnp{width:100%;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .12s}
 .btnp:hover{background:#1d4ed8}
 .btnp:disabled{opacity:.4;cursor:not-allowed}
@@ -158,7 +136,6 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .ah-sub{margin-left:auto;font-size:10px;color:var(--t3)}
 .ah-ref{padding:5px 10px;border-radius:var(--r);border:1px solid var(--b1);background:none;color:var(--t3);font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:'Inter',sans-serif}
 .ah-ref:hover{background:var(--s2);color:var(--t1)}
-
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin .7s linear infinite;display:inline-block}
 @keyframes fi{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
@@ -167,14 +144,10 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 </head>
 <body>
 <div id="app">
-
 <nav id="sb">
   <div class="brand">
     <div class="brand-ico"><i class="ti ti-radar" aria-hidden="true"></i></div>
-    <div>
-      <div class="brand-name">Radar</div>
-      <div class="brand-sub">Oportunidades Inteligentes</div>
-    </div>
+    <div><div class="brand-name">Radar</div><div class="brand-sub">Oportunidades Inteligentes</div></div>
   </div>
   <div style="padding:8px 0 0">
     <div class="ns">Dashboards</div>
@@ -194,7 +167,6 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
     <div id="sf-ts" style="margin-top:3px">Clique em "Capturar editais"</div>
   </div>
 </nav>
-
 <div id="main">
   <div id="tb">
     <button class="at ta"    id="tab-all"   onclick="setArea('all')">  <i class="ti ti-layout-dashboard" style="font-size:13px" aria-hidden="true"></i> Geral</button>
@@ -206,24 +178,19 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
       <i class="ti ti-search" style="font-size:13px;color:var(--t3)" aria-hidden="true"></i>
       <input placeholder="Buscar edital ou órgão..." id="inp-busca" oninput="dBusca(this.value)" aria-label="Buscar"/>
     </div>
-    <button class="ib" onclick="setView('captura')" title="Capturar">
-      <i class="ti ti-refresh" aria-hidden="true"></i>
-    </button>
-    <button class="ib" title="Alta prioridade">
-      <i class="ti ti-bell" aria-hidden="true"></i>
-      <div class="nd" id="nd">0</div>
-    </button>
+    <button class="ib" onclick="setView('captura')" title="Capturar"><i class="ti ti-refresh" aria-hidden="true"></i></button>
+    <button class="ib" title="Alta prioridade"><i class="ti ti-bell" aria-hidden="true"></i><div class="nd" id="nd">0</div></button>
   </div>
   <div id="ct"></div>
 </div>
 </div>
 
 <script>
-// ── DICIONÁRIO DE PALAVRAS-CHAVE ─────────────────────────────────
+// ── PALAVRAS-CHAVE ────────────────────────────────────────────────
 const KW = {
-  tecnologia: {
-    label: 'Tecnologia', c:'var(--tech-c)', bg:'var(--tech-bg)', t:'var(--tech-t)', icon:'ti-cpu',
-    peso: ['software','sistema de informação','sistema integrado','sistema web','desenvolvimento de sistema',
+  tecnologia:{
+    label:'Tecnologia',c:'var(--tech-c)',bg:'var(--tech-bg)',t:'var(--tech-t)',icon:'ti-cpu',
+    peso:['software','sistema de informação','sistema integrado','sistema web','desenvolvimento de sistema',
       'desenvolvimento de software','aplicativo','aplicação web','portal web','erp','crm','lms','cms',
       'plataforma digital','tecnologia da informação','tecnologia de informação','serviços de ti',
       'consultoria de ti','solução de ti','infraestrutura de ti','computação em nuvem','cloud computing',
@@ -235,12 +202,12 @@ const KW = {
       'computador','notebook','desktop','impressora','equipamento de informática','equipamentos de informática',
       'scanner','tablet','suporte técnico','suporte de ti','help desk','service desk','manutenção de equipamentos',
       'licença de software','licenciamento de software','microsoft office','microsoft 365','google workspace'],
-    bonus: ['digital','digitalização','transformação digital','automação','inovação tecnológica',
+    bonus:['digital','digitalização','transformação digital','automação','inovação tecnológica',
       'conectividade','internet','wi-fi','iot','monitoramento','dashboard','integração de sistemas'],
   },
-  treinamento: {
-    label: 'Treinamento', c:'var(--trein-c)', bg:'var(--trein-bg)', t:'var(--trein-t)', icon:'ti-school',
-    peso: ['treinamento','capacitação','curso ','cursos ','formação profissional','formação continuada',
+  treinamento:{
+    label:'Treinamento',c:'var(--trein-c)',bg:'var(--trein-bg)',t:'var(--trein-t)',icon:'ti-school',
+    peso:['treinamento','capacitação','curso ','cursos ','formação profissional','formação continuada',
       'qualificação profissional','qualificação de pessoal','qualificação de servidores',
       'ead','e-learning','ensino a distância','ensino à distância','educação corporativa',
       'educação continuada','educação profissional','educação técnica','aprendizagem corporativa',
@@ -250,12 +217,12 @@ const KW = {
       'learning management system','plataforma lms','material didático','conteúdo didático',
       'escola corporativa','universidade corporativa','pós-graduação','especialização','mba ',
       'curso de inglês','curso de espanhol','idiomas','língua estrangeira'],
-    bonus: ['aprendizagem','aprendizado','habilidades','competências','desenvolvimento profissional',
+    bonus:['aprendizagem','aprendizado','habilidades','competências','desenvolvimento profissional',
       'reciclagem','atualização profissional','nivelamento','capacitar','instrutoria'],
   },
-  rh: {
-    label: 'Programas de RH', c:'var(--rh-c)', bg:'var(--rh-bg)', t:'var(--rh-t)', icon:'ti-users',
-    peso: ['recursos humanos','gestão de pessoas','gestão de rh','administração de pessoal',
+  rh:{
+    label:'Programas de RH',c:'var(--rh-c)',bg:'var(--rh-bg)',t:'var(--rh-t)',icon:'ti-users',
+    peso:['recursos humanos','gestão de pessoas','gestão de rh','administração de pessoal',
       'recrutamento e seleção','processo seletivo','seleção de pessoal','seleção de servidores',
       'headhunting','banco de talentos','atração de talentos','consultoria de rh',
       'consultoria em gestão de pessoas','consultoria organizacional','consultoria de recursos humanos',
@@ -268,137 +235,116 @@ const KW = {
       'programa de jovens talentos','programa de estágio','programa trainee',
       'programa de aprendizagem','lei do aprendiz','outplacement','recolocação profissional',
       'plano de desenvolvimento individual','pdi '],
-    bonus: ['colaboradores','funcionários','trabalhadores','equipe','talentos',
+    bonus:['colaboradores','funcionários','trabalhadores','equipe','talentos',
       'people analytics','onboarding','offboarding','employer branding','endomarketing'],
   },
 };
 
-// ── CLASSIFICAÇÃO ────────────────────────────────────────────────
-function classificar(texto) {
-  if (!texto) return null;
-  const t = texto.toLowerCase();
-  const res = {};
-  for (const [area, cfg] of Object.entries(KW)) {
-    let score = 0;
-    const found = new Set();
-    for (const kw of cfg.peso)  { if (t.includes(kw.trim())) { score += 10; found.add(kw.trim()); } }
-    for (const kw of cfg.bonus) { if (t.includes(kw.trim())) { score +=  3; found.add(kw.trim()); } }
-    if (score >= 10) res[area] = { score, found: [...found] };
+// Termos enviados à API (um por vez)
+const TERMOS = [
+  'software','tecnologia da informação','sistema de informação',
+  'suporte tecnico','licenca de software','equipamento informatica',
+  'treinamento','capacitacao','curso','e-learning','educacao corporativa',
+  'recursos humanos','recrutamento','gestao de pessoas','coaching',
+];
+
+// ── CLASSIFICAÇÃO ─────────────────────────────────────────────────
+function classificar(texto){
+  if(!texto)return null;
+  const t=texto.toLowerCase();
+  const res={};
+  for(const[area,cfg]of Object.entries(KW)){
+    let score=0;const found=new Set();
+    for(const kw of cfg.peso){if(t.includes(kw.trim())){score+=10;found.add(kw.trim());}}
+    for(const kw of cfg.bonus){if(t.includes(kw.trim())){score+=3;found.add(kw.trim());}}
+    if(score>=10)res[area]={score,found:[...found]};
   }
-  if (!Object.keys(res).length) return null;
-  const [melhor, dados] = Object.entries(res).sort((a,b) => b[1].score - a[1].score)[0];
-  return { area: melhor, label: KW[melhor].label, score: dados.score, palavras: dados.found.slice(0,5) };
+  if(!Object.keys(res).length)return null;
+  const[melhor,dados]=Object.entries(res).sort((a,b)=>b[1].score-a[1].score)[0];
+  return{area:melhor,label:KW[melhor].label,score:dados.score,palavras:dados.found.slice(0,5)};
+}
+function prioridade(s){return s>=30?'Alta':s>=13?'Média':'Baixa';}
+
+// ── API compras.dados.gov.br ──────────────────────────────────────
+async function buscarTermo(termo,offset=0){
+  const url=`https://compras.dados.gov.br/licitacoes/v1/licitacoes.json?descricao_objeto=${encodeURIComponent(termo)}&offset=${offset}`;
+  const r=await fetch(url,{signal:AbortSignal.timeout(12000)});
+  if(!r.ok)throw new Error(`HTTP ${r.status}`);
+  const j=await r.json();
+  return Array.isArray(j)?j:[];
 }
 
-function prioridade(score) {
-  return score >= 30 ? 'Alta' : score >= 13 ? 'Média' : 'Baixa';
-}
-
-function normalizar(raw) {
-  const org = raw.orgaoEntidade || {};
-  const uni = raw.unidadeOrgao  || {};
-  const num = raw.numeroControlePNCP || `${org.cnpj||'x'}-${raw.anoCompra}-${raw.sequencialCompra}`;
-  return {
-    id:               num,
-    objeto:           (raw.objetoCompra || '').trim(),
-    orgao:            org.razaoSocial || uni.nomeUnidade || '',
-    uf:               uni.ufSigla || '',
-    municipio:        uni.municipioNome || '',
-    modalidade:       raw.modalidadeNome || '',
-    valor:            raw.valorTotalEstimado || 0,
-    data_publicacao:  (raw.dataPublicacaoPncp || '').slice(0,10),
-    data_encerramento:(raw.dataEncerramentoProposta || raw.dataAberturaProposta || '').slice(0,10),
-    link:             raw.linkSistemaOrigem || `https://pncp.gov.br/app/editais/${num}`,
+function normalizar(raw){
+  return{
+    id:raw.identificador||raw.numero||String(Math.random()),
+    objeto:(raw.descricao_objeto||raw.objeto||'').trim(),
+    orgao:raw.unidade_gestora?.nome_resumido||raw.orgao?.nome||'',
+    uf:raw.unidade_gestora?.uf||'',
+    municipio:raw.municipio||'',
+    modalidade:raw.modalidade?.descricao||'',
+    valor:parseFloat(raw.valor_estimado||raw.valor_licitacao||0)||0,
+    data_publicacao:(raw.data_publicacao_edital||'').slice(0,10),
+    data_encerramento:(raw.data_entrega_proposta||raw.data_abertura||'').slice(0,10),
+    link:raw.link||`https://compras.dados.gov.br/licitacoes/doc/licitacao/${raw.identificador}`,
   };
 }
 
-// ── BUSCA NO PNCP (direto do browser) ───────────────────────────
-const PNCP = 'https://pncp.gov.br/api/consulta/v1';
-
-function fmtData(d) {
-  return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
-}
-
-async function buscarDia(d) {
-  const dt = fmtData(d);
-  const url = `${PNCP}/contratacoes/publicacao?dataInicial=${dt}&dataFinal=${dt}&tamanhoPagina=50&pagina=1`;
-  const r = await fetch(url, { headers: { Accept:'application/json' }, signal: AbortSignal.timeout(12000) });
-  if (!r.ok) throw new Error(`HTTP ${r.status}`);
-  const j = await r.json();
-  return Array.isArray(j?.data) ? j.data : [];
-}
-
-// ── ESTADO ───────────────────────────────────────────────────────
-const S = { area:'all', view:'dash', pagina:1, busca:'', pri:'', uf:'', editais:[], stats:{}, capturado_em:null };
-
-const ACFG = {
-  all:  { label:'Todas as áreas', c:'var(--b2c)',  bg:'rgba(37,99,235,.12)',  t:'var(--b3c)',   icon:'ti-layout-dashboard' },
-  tech: { label:'Tecnologia',     c:'var(--blue)', bg:'var(--tech-bg)',        t:'var(--tech-t)',icon:'ti-cpu' },
-  trein:{ label:'Treinamento',    c:'var(--g2)',   bg:'var(--trein-bg)',       t:'var(--trein-t)',icon:'ti-school' },
-  rh:   { label:'Programas de RH',c:'var(--p2)',   bg:'var(--rh-bg)',          t:'var(--rh-t)', icon:'ti-users' },
+// ── ESTADO ────────────────────────────────────────────────────────
+const S={area:'all',view:'dash',pagina:1,busca:'',pri:'',uf:'',editais:[],stats:{},capturado_em:null};
+const ACFG={
+  all: {label:'Todas as áreas',c:'var(--b2c)', bg:'rgba(37,99,235,.12)', t:'var(--b3c)',   icon:'ti-layout-dashboard'},
+  tech:{label:'Tecnologia',    c:'var(--blue)',bg:'var(--tech-bg)',       t:'var(--tech-t)',icon:'ti-cpu'},
+  trein:{label:'Treinamento',  c:'var(--g2)', bg:'var(--trein-bg)',      t:'var(--trein-t)',icon:'ti-school'},
+  rh:  {label:'Programas de RH',c:'var(--p2)',bg:'var(--rh-bg)',         t:'var(--rh-t)', icon:'ti-users'},
 };
 
-// ── INIT ─────────────────────────────────────────────────────────
 renderDash();
 
-// ── NAVEGAÇÃO ─────────────────────────────────────────────────────
-function setArea(a) {
-  S.area = a; S.pagina = 1; S.view = 'dash';
-  ['all','tech','trein','rh'].forEach(k => {
-    document.getElementById('nb-'+k).className   = 'nb'+(k===a?' a-'+a:'');
-    document.getElementById('tab-'+k).className  = 'at'+(k===a?' t'+a:'');
+function setArea(a){
+  S.area=a;S.pagina=1;S.view='dash';
+  ['all','tech','trein','rh'].forEach(k=>{
+    document.getElementById('nb-'+k).className='nb'+(k===a?' a-'+a:'');
+    document.getElementById('tab-'+k).className='at'+(k===a?' t'+a:'');
   });
   renderDash();
 }
-function setView(v) { S.view = v; v==='captura' ? renderCaptura() : renderDash(); }
+function setView(v){S.view=v;v==='captura'?renderCaptura():renderDash();}
 
-// ── FILTRAR ───────────────────────────────────────────────────────
-function filtrar() {
-  let d = S.editais;
-  if (S.area !== 'all') d = d.filter(e => e.area === S.area);
-  if (S.pri)   d = d.filter(e => e.prioridade === S.pri);
-  if (S.uf)    d = d.filter(e => e.uf === S.uf);
-  if (S.busca) {
-    const q = S.busca.toLowerCase();
-    d = d.filter(e => e.objeto.toLowerCase().includes(q) || (e.orgao||'').toLowerCase().includes(q));
-  }
+function filtrar(){
+  let d=S.editais;
+  if(S.area!=='all')d=d.filter(e=>e.area===S.area);
+  if(S.pri)d=d.filter(e=>e.prioridade===S.pri);
+  if(S.uf)d=d.filter(e=>e.uf===S.uf);
+  if(S.busca){const q=S.busca.toLowerCase();d=d.filter(e=>e.objeto.toLowerCase().includes(q)||(e.orgao||'').toLowerCase().includes(q));}
   return d;
 }
 
-// ── RENDER DASHBOARD ──────────────────────────────────────────────
-function renderDash() {
-  const A    = ACFG[S.area];
-  const todos = filtrar();
-  const st   = S.stats;
-  const ufs  = [...new Set(S.editais.map(e=>e.uf).filter(Boolean))].sort();
-  const PG   = 16;
-  const totalPags = Math.ceil(todos.length / PG);
-  const page = todos.slice((S.pagina-1)*PG, S.pagina*PG);
+function renderDash(){
+  const A=ACFG[S.area],todos=filtrar(),st=S.stats;
+  const ufs=[...new Set(S.editais.map(e=>e.uf).filter(Boolean))].sort();
+  const PG=16,totalPags=Math.ceil(todos.length/PG),page=todos.slice((S.pagina-1)*PG,S.pagina*PG);
+  const nArea=S.area==='all'?(st.total||0):(st[S.area==='tech'?'tecnologia':S.area==='trein'?'treinamento':'rh']||0);
+  const nAlta=todos.filter(e=>e.prioridade==='Alta').length;
+  const nUrg=todos.filter(e=>diasAte(e.data_encerramento)>=0&&diasAte(e.data_encerramento)<=7).length;
+  const nNov=todos.filter(e=>e.data_publicacao>=dHa(7)).length;
 
-  const nArea = S.area==='all' ? (st.total||0) : (st[S.area==='tech'?'tecnologia':S.area==='trein'?'treinamento':'rh']||0);
-  const nAlta = todos.filter(e=>e.prioridade==='Alta').length;
-  const nUrg  = todos.filter(e=>diasAte(e.data_encerramento)>=0&&diasAte(e.data_encerramento)<=7).length;
-  const nNov  = todos.filter(e=>e.data_publicacao>=dHa(7)).length;
-
-  document.getElementById('ct').innerHTML = `
+  document.getElementById('ct').innerHTML=`
     <div class="ah">
       <div class="ab2" style="background:${A.bg};color:${A.t}"><i class="ti ${A.icon}" aria-hidden="true" style="font-size:14px"></i> ${A.label}</div>
       <span class="ah-tit">${todos.length} oportunidades</span>
       <button class="ah-ref" onclick="setView('captura')"><i class="ti ti-refresh" aria-hidden="true"></i> Atualizar</button>
-      <span class="ah-sub">${S.capturado_em ? 'Capturado às '+new Date(S.capturado_em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : 'Nenhuma captura ainda'}</span>
+      <span class="ah-sub">${S.capturado_em?'Capturado às '+new Date(S.capturado_em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'Nenhuma captura ainda'}</span>
     </div>
-
     <div class="mets">
-      <div class="mc"><div class="mc-l">Editais ${S.area==='all'?'totais':A.label.toLowerCase()}</div><div class="mc-v" style="color:${A.c}">${nArea}</div><div class="mc-s">capturados do PNCP</div></div>
-      <div class="mc"><div class="mc-l">Alta prioridade</div><div class="mc-v" style="color:var(--r3)">${nAlta}</div><div class="mc-s">score de relevância alto</div></div>
+      <div class="mc"><div class="mc-l">Editais ${S.area==='all'?'totais':A.label.toLowerCase()}</div><div class="mc-v" style="color:${A.c}">${nArea}</div><div class="mc-s">capturados do gov</div></div>
+      <div class="mc"><div class="mc-l">Alta prioridade</div><div class="mc-v" style="color:var(--r3)">${nAlta}</div><div class="mc-s">score alto</div></div>
       <div class="mc"><div class="mc-l">Prazo urgente</div><div class="mc-v" style="color:var(--a3)">${nUrg}</div><div class="mc-s">encerram em ≤ 7 dias</div></div>
-      <div class="mc"><div class="mc-l">Publicados recentes</div><div class="mc-v" style="color:var(--g3)">${nNov}</div><div class="mc-s">nos últimos 7 dias</div></div>
+      <div class="mc"><div class="mc-l">Recentes</div><div class="mc-v" style="color:var(--g3)">${nNov}</div><div class="mc-s">nos últimos 7 dias</div></div>
     </div>
-
     <div class="filt">
       <select class="fs" onchange="S.pri=this.value;S.pagina=1;renderDash()">
         <option value="">Toda prioridade</option>
-        <option value="Alta"  ${S.pri==='Alta' ?'selected':''}>Alta</option>
+        <option value="Alta" ${S.pri==='Alta'?'selected':''}>Alta</option>
         <option value="Média" ${S.pri==='Média'?'selected':''}>Média</option>
         <option value="Baixa" ${S.pri==='Baixa'?'selected':''}>Baixa</option>
       </select>
@@ -415,12 +361,9 @@ function renderDash() {
       <button class="btns" onclick="setView('captura')"><i class="ti ti-radar" aria-hidden="true"></i> Capturar</button>
       <span class="rc">${todos.length} resultados</span>
     </div>
-
     <div class="cols">
       <div>
-        <div class="ops fi" id="ops-list">
-          ${page.length ? page.map(opCard).join('') : emptyState()}
-        </div>
+        <div class="ops fi">${page.length?page.map(opCard).join(''):emptyState()}</div>
         ${totalPags>1?`<div class="pag">
           <button class="pbtn" ${S.pagina<=1?'disabled':''} onclick="S.pagina--;renderDash()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Anterior</button>
           <span class="pinfo">Página ${S.pagina} de ${totalPags}</span>
@@ -428,32 +371,22 @@ function renderDash() {
         </div>`:''}
       </div>
       <div class="colr">
-        <div class="card">
-          <div class="ch"><i class="ti ti-clock" aria-hidden="true"></i> Prazos próximos</div>
-          ${renderTL(todos)}
-        </div>
-        <div class="card">
-          <div class="ch"><i class="ti ti-chart-bar" aria-hidden="true"></i> Por área</div>
-          ${renderBarras()}
-        </div>
+        <div class="card"><div class="ch"><i class="ti ti-clock" aria-hidden="true"></i> Prazos próximos</div>${renderTL(todos)}</div>
+        <div class="card"><div class="ch"><i class="ti ti-chart-bar" aria-hidden="true"></i> Por área</div>${renderBarras()}</div>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
-function opCard(op) {
-  const pc  = {Alta:'pA',Média:'pM',Baixa:'pB'}[op.prioridade]||'pB';
-  const dias = diasAte(op.data_encerramento);
-  const sc  = op.score||0;
-  const scC = sc>=30?'var(--r3)':sc>=13?'var(--a3)':'var(--g3)';
-  const tc  = {tecnologia:'tag-tech',treinamento:'tag-trein',rh:'tag-rh'}[op.area]||'';
-  const A   = ACFG[op.area]||ACFG.all;
-  const kws = op.palavras||[];
-  return `<div class="op fi">
-    <div class="op-top">
-      <div class="op-tit">${esc(op.objeto)}</div>
-      <span class="pri ${pc}">${op.prioridade}</span>
-    </div>
+function opCard(op){
+  const pc={Alta:'pA',Média:'pM',Baixa:'pB'}[op.prioridade]||'pB';
+  const dias=diasAte(op.data_encerramento);
+  const sc=op.score||0;
+  const scC=sc>=30?'var(--r3)':sc>=13?'var(--a3)':'var(--g3)';
+  const tc={tecnologia:'tag-tech',treinamento:'tag-trein',rh:'tag-rh'}[op.area]||'';
+  const A=ACFG[op.area]||ACFG.all;
+  const kws=op.palavras||[];
+  return`<div class="op fi">
+    <div class="op-top"><div class="op-tit">${esc(op.objeto)}</div><span class="pri ${pc}">${op.prioridade}</span></div>
     <div class="op-org">${esc(op.orgao||'—')}${op.uf?' · '+op.uf:''}</div>
     <div class="op-foot">
       <span class="tag ${tc}">${A.label}</span>
@@ -463,214 +396,173 @@ function opCard(op) {
       <div class="scw">
         <span class="scn" style="color:${scC}">${sc}</span>
         <div class="scb"><div class="scf" style="width:${Math.min(sc*2.5,100)}%;background:${scC}"></div></div>
-        ${op.link?`<button class="opbtn" onclick="window.open('${esc(op.link)}','_blank')" title="Ver no PNCP"><i class="ti ti-external-link" aria-hidden="true"></i></button>`:''}
+        ${op.link?`<button class="opbtn" onclick="window.open('${esc(op.link)}','_blank')" title="Ver edital"><i class="ti ti-external-link" aria-hidden="true"></i></button>`:''}
       </div>
     </div>
   </div>`;
 }
 
-function emptyState() {
-  if (!S.capturado_em) return `<div class="empty">
-    <i class="ti ti-radar" aria-hidden="true"></i>
-    Nenhum edital ainda.<br>Clique em <strong>"Capturar editais"</strong> para buscar no PNCP.
-    <br><br>
-    <button class="btnp" style="width:auto;padding:8px 20px;margin:auto" onclick="setView('captura')">
-      <i class="ti ti-player-play" aria-hidden="true"></i> Capturar agora
-    </button></div>`;
-  return `<div class="empty"><i class="ti ti-search" aria-hidden="true"></i>Nenhum resultado para os filtros.</div>`;
+function emptyState(){
+  if(!S.capturado_em)return`<div class="empty"><i class="ti ti-radar" aria-hidden="true"></i>Nenhum edital ainda.<br>Clique em <strong>"Capturar editais"</strong> para buscar.<br><br>
+    <button class="btnp" style="width:auto;padding:8px 20px;margin:auto" onclick="setView('captura')"><i class="ti ti-player-play" aria-hidden="true"></i> Capturar agora</button></div>`;
+  return`<div class="empty"><i class="ti ti-search" aria-hidden="true"></i>Nenhum resultado para os filtros.</div>`;
 }
 
-function renderTL(editais) {
-  const s = [...editais].filter(e=>diasAte(e.data_encerramento)>=0).sort((a,b)=>diasAte(a.data_encerramento)-diasAte(b.data_encerramento)).slice(0,8);
-  if (!s.length) return '<div style="font-size:11px;color:var(--t3);padding:4px 0">Nenhum prazo ativo.</div>';
-  return '<div class="tl">'+s.map(e=>{
-    const d=diasAte(e.data_encerramento);
-    const c=d<=7?'var(--r2)':d<=15?'var(--a2)':'var(--g2)';
-    return `<div class="tlr"><div class="tld" style="background:${c}"></div>
+function renderTL(editais){
+  const s=[...editais].filter(e=>diasAte(e.data_encerramento)>=0).sort((a,b)=>diasAte(a.data_encerramento)-diasAte(b.data_encerramento)).slice(0,8);
+  if(!s.length)return'<div style="font-size:11px;color:var(--t3);padding:4px 0">Nenhum prazo ativo.</div>';
+  return'<div class="tl">'+s.map(e=>{
+    const d=diasAte(e.data_encerramento);const c=d<=7?'var(--r2)':d<=15?'var(--a2)':'var(--g2)';
+    return`<div class="tlr"><div class="tld" style="background:${c}"></div>
       <div class="tlb"><div class="tln">${esc((e.objeto||'').slice(0,44))}…</div>
       <div class="tls">${esc(e.orgao||'')}${e.uf?' · '+e.uf:''} · ${fmtD(e.data_encerramento)}</div></div>
       <div class="tldias" style="color:${c}">${d}d</div></div>`;
   }).join('')+'</div>';
 }
 
-function renderBarras() {
-  const st = S.stats;
-  const cfgs = [
-    {l:'Tecnologia', c:'var(--b2c)',  n:st.tecnologia ||0},
-    {l:'Treinamento',c:'var(--g2)',   n:st.treinamento||0},
-    {l:'RH',         c:'var(--p2)',   n:st.rh         ||0},
-  ];
-  const max = Math.max(...cfgs.map(c=>c.n),1);
-  return cfgs.map(c=>`<div class="abr">
-    <span class="abl">${c.l}</span>
-    <div class="abt"><div class="abf" style="width:${Math.round(c.n/max*100)}%;background:${c.c}"></div></div>
-    <span class="abn">${c.n}</span>
-  </div>`).join('');
+function renderBarras(){
+  const st=S.stats;
+  const cfgs=[{l:'Tecnologia',c:'var(--b2c)',n:st.tecnologia||0},{l:'Treinamento',c:'var(--g2)',n:st.treinamento||0},{l:'RH',c:'var(--p2)',n:st.rh||0}];
+  const max=Math.max(...cfgs.map(c=>c.n),1);
+  return cfgs.map(c=>`<div class="abr"><span class="abl">${c.l}</span><div class="abt"><div class="abf" style="width:${Math.round(c.n/max*100)}%;background:${c.c}"></div></div><span class="abn">${c.n}</span></div>`).join('');
 }
 
-// ── RENDER CAPTURA ────────────────────────────────────────────────
-function renderCaptura() {
-  document.getElementById('ct').innerHTML = `
+function renderCaptura(){
+  document.getElementById('ct').innerHTML=`
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div>
         <div class="card" style="margin-bottom:12px">
           <div class="ch"><i class="ti ti-world" aria-hidden="true"></i> Fonte de dados</div>
-          <div style="display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(5,150,105,.3);border-radius:var(--r);background:rgba(5,150,105,.08);margin-bottom:6px">
+          <div style="display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(5,150,105,.3);border-radius:var(--r);background:rgba(5,150,105,.08)">
             <div style="width:8px;height:8px;border-radius:50%;background:var(--g2);flex-shrink:0"></div>
-            <div><div style="font-size:12px;font-weight:500">PNCP — Portal Nacional</div><div style="font-size:10px;color:var(--t3)">API pública · chamada direta do browser</div></div>
+            <div><div style="font-size:12px;font-weight:500">compras.dados.gov.br</div><div style="font-size:10px;color:var(--t3)">API aberta · busca por texto · sem bloqueio de IP</div></div>
             <i class="ti ti-check" aria-hidden="true" style="font-size:13px;color:var(--g3);margin-left:auto"></i>
           </div>
         </div>
         <div class="card">
-          <div class="ch"><i class="ti ti-tags" aria-hidden="true"></i> Áreas monitoradas</div>
-          <div style="display:flex;flex-direction:column;gap:7px">
-            ${Object.entries(KW).map(([k,cfg])=>`
-              <div style="padding:9px 11px;border-radius:var(--r);background:${cfg.bg};border:1px solid ${cfg.t}33">
-                <div style="font-size:11px;font-weight:600;color:${cfg.t};margin-bottom:3px"><i class="ti ${cfg.icon}" aria-hidden="true"></i> ${cfg.label}</div>
-                <div style="font-size:10px;color:var(--t3);line-height:1.6">${cfg.peso.slice(0,6).join(' · ')}…</div>
-              </div>`).join('')}
+          <div class="ch"><i class="ti ti-tags" aria-hidden="true"></i> Termos buscados (${TERMOS.length})</div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px">
+            ${TERMOS.map(t=>`<span style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--s3);color:var(--t2);border:1px solid var(--b1)">${t}</span>`).join('')}
           </div>
         </div>
       </div>
       <div>
         <div class="card" style="margin-bottom:12px">
-          <div class="ch"><i class="ti ti-adjustments" aria-hidden="true"></i> Parâmetros</div>
-          <label class="lbl">Dias retroativos para buscar</label>
-          <input class="inp" type="number" id="p-dias" value="3" min="1" max="7"/>
-          <div style="font-size:10px;color:var(--t3);margin-bottom:12px">Recomendado: 3 dias. Cada dia busca ~50 editais do PNCP.</div>
+          <div class="ch"><i class="ti ti-player-play" aria-hidden="true"></i> Executar</div>
+          <div style="font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.6">Busca cada termo na API pública do governo e classifica automaticamente em <strong style="color:var(--t2)">Tecnologia</strong>, <strong style="color:var(--t2)">Treinamento</strong> e <strong style="color:var(--t2)">Programas de RH</strong>.</div>
           <div style="display:flex;gap:8px">
-            <button class="btnp" id="btn-cap" onclick="executarCaptura()">
-              <i class="ti ti-player-play" aria-hidden="true"></i> Capturar agora
-            </button>
+            <button class="btnp" id="btn-cap" onclick="executarCaptura()"><i class="ti ti-player-play" aria-hidden="true"></i> Capturar agora</button>
             <button class="btns" onclick="setArea('all')"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
           </div>
         </div>
         <div class="card">
-          <div class="ch"><i class="ti ti-activity" aria-hidden="true"></i> Log de execução</div>
+          <div class="ch"><i class="ti ti-terminal" aria-hidden="true"></i> Log</div>
           <div class="progw"><div class="progf" id="pg" style="width:0%"></div></div>
           <div class="logbox" id="logbox"><span class="ll">Aguardando...</span></div>
         </div>
         ${S.capturado_em?`<div class="card" style="margin-top:12px">
           <div class="ch"><i class="ti ti-history" aria-hidden="true"></i> Última captura</div>
           <div class="csr"><span style="color:var(--t3)">Executada em</span><span>${new Date(S.capturado_em).toLocaleString('pt-BR')}</span></div>
-          <div class="csr"><span style="color:var(--t3)">Total capturado</span><span style="color:var(--g3)">${S.stats.total||0}</span></div>
+          <div class="csr"><span style="color:var(--t3)">Total</span><span style="color:var(--g3)">${S.stats.total||0}</span></div>
           <div class="csr"><span style="color:var(--tech-t)">Tecnologia</span><span>${S.stats.tecnologia||0}</span></div>
           <div class="csr"><span style="color:var(--trein-t)">Treinamento</span><span>${S.stats.treinamento||0}</span></div>
           <div class="csr" style="border:none"><span style="color:var(--rh-t)">Programas de RH</span><span>${S.stats.rh||0}</span></div>
         </div>`:''}
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
-// ── EXECUTAR CAPTURA ──────────────────────────────────────────────
-async function executarCaptura() {
-  const btn = document.getElementById('btn-cap');
-  if (btn) btn.disabled = true;
-  const lb = document.getElementById('logbox');
-  if (lb) lb.innerHTML = '';
-
-  const log = (msg, n='') => {
-    if (!lb) return;
-    const el = document.createElement('span');
-    el.className = 'll '+n;
-    el.textContent = `[${new Date().toLocaleTimeString('pt-BR')}] ${msg}\n`;
-    lb.appendChild(el);
-    lb.scrollTop = lb.scrollHeight;
+async function executarCaptura(){
+  const btn=document.getElementById('btn-cap');
+  if(btn)btn.disabled=true;
+  const lb=document.getElementById('logbox');
+  if(lb)lb.innerHTML='';
+  const log=(msg,n='')=>{
+    if(!lb)return;
+    const el=document.createElement('span');
+    el.className='ll '+n;
+    el.textContent=`[${new Date().toLocaleTimeString('pt-BR')}] ${msg}\n`;
+    lb.appendChild(el);lb.scrollTop=lb.scrollHeight;
   };
-  const prog = p => { const el=document.getElementById('pg'); if(el) el.style.width=p+'%'; };
+  const prog=p=>{const el=document.getElementById('pg');if(el)el.style.width=p+'%';};
 
-  const dias = parseInt(document.getElementById('p-dias')?.value||3);
-  log(`Iniciando captura — últimos ${dias} dias`, 'info');
+  log('Iniciando captura via compras.dados.gov.br...','info');
+  log(`Buscando ${TERMOS.length} termos...`,'info');
   prog(5);
 
-  const brutos = [];
-  for (let i = 0; i < dias; i++) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
-    const ds = fmtData(d);
-    log(`Buscando ${ds}...`, 'info');
-    try {
-      const items = await buscarDia(d);
-      brutos.push(...items);
-      log(`${ds}: ${items.length} editais recebidos`, 'ok');
-    } catch(e) {
-      log(`${ds}: ${e.message}`, 'aviso');
-    }
-    prog(5 + Math.round((i+1)/dias*60));
-    await new Promise(r => setTimeout(r, 100));
+  const brutos=[],vistos=new Set();
+  for(let i=0;i<TERMOS.length;i++){
+    const termo=TERMOS[i];
+    log(`Buscando: "${termo}"...`,'info');
+    try{
+      const items=await buscarTermo(termo);
+      let novos=0;
+      for(const it of items){
+        const id=it.identificador||it.numero||(it.descricao_objeto||'').slice(0,60);
+        if(!vistos.has(id)){vistos.add(id);brutos.push(it);novos++;}
+      }
+      log(`"${termo}": ${novos} editais`,'ok');
+    }catch(e){log(`"${termo}": ${e.message}`,'aviso');}
+    prog(5+Math.round((i+1)/TERMOS.length*65));
+    await new Promise(r=>setTimeout(r,400));
   }
 
-  log(`Total bruto: ${brutos.length} editais. Classificando...`, 'info');
-  prog(70);
+  log(`Total: ${brutos.length} editais únicos. Classificando...`,'info');
+  prog(75);
 
-  // Classificar
-  S.editais = [];
-  let tech=0, trein=0, rh=0;
-  for (const raw of brutos) {
-    const item = normalizar(raw);
-    if (!item.objeto) continue;
-    const cl = classificar(item.objeto);
-    if (!cl) continue;
-    S.editais.push({ ...item, area:cl.area, score:cl.score, prioridade:prioridade(cl.score), palavras:cl.palavras });
-    if (cl.area==='tecnologia')  tech++;
-    else if (cl.area==='treinamento') trein++;
-    else if (cl.area==='rh')     rh++;
+  S.editais=[];let tech=0,trein=0,rh=0;
+  for(const raw of brutos){
+    const item=normalizar(raw);
+    if(!item.objeto)continue;
+    const cl=classificar(item.objeto);
+    if(!cl)continue;
+    S.editais.push({...item,area:cl.area,score:cl.score,prioridade:prioridade(cl.score),palavras:cl.palavras});
+    if(cl.area==='tecnologia')tech++;
+    else if(cl.area==='treinamento')trein++;
+    else if(cl.area==='rh')rh++;
   }
 
-  S.editais.sort((a,b) => b.score - a.score);
-  S.capturado_em = new Date().toISOString();
-  S.stats = {
-    total: S.editais.length, tecnologia: tech, treinamento: trein, rh,
-    alta: S.editais.filter(e=>e.prioridade==='Alta').length,
-  };
+  S.editais.sort((a,b)=>b.score-a.score);
+  S.capturado_em=new Date().toISOString();
+  S.stats={total:S.editais.length,tecnologia:tech,treinamento:trein,rh,alta:S.editais.filter(e=>e.prioridade==='Alta').length};
 
   prog(100);
-  log(`Tecnologia   : ${tech}`,  'ok');
-  log(`Treinamento  : ${trein}`, 'ok');
-  log(`Programas RH : ${rh}`,    'ok');
-  log(`Total relevante: ${S.editais.length} de ${brutos.length}`, 'ok');
+  log(`Tecnologia   : ${tech}`,'ok');
+  log(`Treinamento  : ${trein}`,'ok');
+  log(`Programas RH : ${rh}`,'ok');
+  log(`Total relevante: ${S.editais.length} de ${brutos.length}`,'ok');
 
-  // Atualizar badges
-  document.getElementById('na-all').textContent   = S.editais.length;
-  document.getElementById('na-tech').textContent  = tech;
-  document.getElementById('na-trein').textContent = trein;
-  document.getElementById('na-rh').textContent    = rh;
-  document.getElementById('nd').textContent        = S.stats.alta||0;
-  document.getElementById('sf-dot').style.background = 'var(--g2)';
-  document.getElementById('sf-txt').textContent   = S.editais.length+' oportunidades';
-  document.getElementById('sf-ts').textContent    = 'Capturado às '+new Date().toLocaleTimeString('pt-BR');
+  document.getElementById('na-all').textContent=S.editais.length;
+  document.getElementById('na-tech').textContent=tech;
+  document.getElementById('na-trein').textContent=trein;
+  document.getElementById('na-rh').textContent=rh;
+  document.getElementById('nd').textContent=S.stats.alta||0;
+  document.getElementById('sf-dot').style.background='var(--g2)';
+  document.getElementById('sf-txt').textContent=S.editais.length+' oportunidades';
+  document.getElementById('sf-ts').textContent='Capturado às '+new Date().toLocaleTimeString('pt-BR');
 
-  if (btn) btn.disabled = false;
-  setTimeout(() => { S.view='dash'; setArea('all'); }, 800);
+  if(btn)btn.disabled=false;
+  setTimeout(()=>{S.view='dash';setArea('all');},800);
 }
 
-// ── EXPORT CSV ────────────────────────────────────────────────────
-function exportCSV() {
-  const d = filtrar();
-  if (!d.length) { alert('Nenhum dado para exportar. Execute uma captura primeiro.'); return; }
-  const h = ['Objeto','Órgão','UF','Município','Área','Modalidade','Prazo','Valor','Score','Prioridade','Palavras-chave','Link'];
-  const rows = d.map(e=>[
-    e.objeto, e.orgao||'', e.uf||'', e.municipio||'',
-    KW[e.area]?.label||e.area||'',
-    e.modalidade||'', e.data_encerramento||'', e.valor||0,
-    e.score||0, e.prioridade||'',
-    (e.palavras||[]).join('; '), e.link||'',
-  ]);
-  const csv = [h,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
-  a.download = 'radar-'+new Date().toISOString().slice(0,10)+'.csv';
+function exportCSV(){
+  const d=filtrar();
+  if(!d.length){alert('Execute uma captura primeiro.');return;}
+  const h=['Objeto','Órgão','UF','Município','Área','Modalidade','Prazo','Valor','Score','Prioridade','Palavras-chave','Link'];
+  const rows=d.map(e=>[e.objeto,e.orgao||'',e.uf||'',e.municipio||'',KW[e.area]?.label||e.area||'',e.modalidade||'',e.data_encerramento||'',e.valor||0,e.score||0,e.prioridade||'',(e.palavras||[]).join('; '),e.link||'']);
+  const csv=[h,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  a.download='radar-'+new Date().toISOString().slice(0,10)+'.csv';
   a.click();
 }
 
-// ── UTILS ─────────────────────────────────────────────────────────
-function diasAte(d) { if(!d) return -1; return Math.round((new Date(d+'T23:59:59')-new Date())/86400000); }
-function fmtD(d)    { if(!d) return '—'; return new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}); }
-function dHa(n)     { const d=new Date(); d.setDate(d.getDate()-n); return d.toISOString().slice(0,10); }
-function esc(s)     { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function diasAte(d){if(!d)return -1;return Math.round((new Date(d+'T23:59:59')-new Date())/86400000);}
+function fmtD(d){if(!d)return'—';return new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});}
+function dHa(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 let dbt=null;
-function dBusca(v)  { clearTimeout(dbt); dbt=setTimeout(()=>{ S.busca=v; S.pagina=1; if(S.view==='dash') renderDash(); },300); }
+function dBusca(v){clearTimeout(dbt);dbt=setTimeout(()=>{S.busca=v;S.pagina=1;if(S.view==='dash')renderDash();},300);}
 </script>
 </body>
 </html>
