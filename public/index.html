@@ -247,6 +247,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 </div>
 
 <script>
+  const BACKEND = 'https://radar-backend-production-c867.up.railway.app';
 // ── ESTADO ───────────────────────────────────────────────────────
 const S = {
   area: 'all', view: 'dash',
@@ -277,7 +278,7 @@ async function carregar(forcar = false) {
   setSfStatus('Buscando no PNCP...', 'var(--a2)');
 
   try {
-    const url = `/api/editais?limite=500&dias=30${forcar ? '&_='+Date.now() : ''}`;
+    const url = `${BACKEND}/api/editais?limite=500&dias=3${forcar ? '&_='+Date.now() : ''}`;
     const r = await fetch(url);
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const d = await r.json();
@@ -576,7 +577,7 @@ async function executarCaptura() {
   prog(5);
 
   try {
-    const r = await fetch('/api/capturar', {
+    const r = await fetch(`${BACKEND}/api/capturar`, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
