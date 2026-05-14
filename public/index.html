@@ -38,6 +38,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .nb.a-tech {background:var(--tech-bg);color:var(--tech-t)}
 .nb.a-trein{background:var(--trein-bg);color:var(--trein-t)}
 .nb.a-rh   {background:var(--rh-bg);color:var(--rh-t)}
+.nb.a-fav  {background:rgba(245,158,11,.14);color:var(--a3)}
 .nba{margin-left:auto;font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
 .sep{height:1px;background:var(--b1);margin:7px 12px}
 .sf{margin-top:auto;padding:11px 13px;border-top:1px solid var(--b1);font-size:10px;color:var(--t3)}
@@ -50,6 +51,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .at.ttech {background:var(--tech-bg);color:var(--tech-t);border-color:rgba(37,99,235,.3)}
 .at.ttrein{background:var(--trein-bg);color:var(--trein-t);border-color:rgba(5,150,105,.3)}
 .at.trh   {background:var(--rh-bg);color:var(--rh-t);border-color:rgba(124,58,237,.3)}
+.at.tfav  {background:rgba(245,158,11,.13);color:var(--a3);border-color:rgba(245,158,11,.3)}
 .sp{flex:1}
 .sw{display:flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:0 10px;width:190px;height:32px;transition:border-color .12s}
 .sw:focus-within{border-color:var(--b2c)}
@@ -76,6 +78,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .ops{display:flex;flex-direction:column;gap:7px}
 .op{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:12px;cursor:pointer;transition:all .14s}
 .op:hover{background:var(--s3);border-color:var(--b2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.op.favorited{border-color:rgba(245,158,11,.35)}
 .op-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px}
 .op-tit{font-size:12px;font-weight:600;color:var(--t1);line-height:1.4;flex:1}
 .pri{font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap;flex-shrink:0}
@@ -88,6 +91,8 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .tag-tech {background:var(--tech-bg);color:var(--tech-t);border-color:rgba(37,99,235,.22)}
 .tag-trein{background:var(--trein-bg);color:var(--trein-t);border-color:rgba(5,150,105,.22)}
 .tag-rh   {background:var(--rh-bg);color:var(--rh-t);border-color:rgba(124,58,237,.22)}
+.tag-pncp {background:rgba(37,99,235,.12);color:#93c5fd;border-color:rgba(37,99,235,.25)}
+.tag-siasg{background:rgba(5,150,105,.12);color:#6ee7b7;border-color:rgba(5,150,105,.25)}
 .dias{font-size:10px;color:var(--t3);display:flex;align-items:center;gap:2px}
 .scw{margin-left:auto;display:flex;align-items:center;gap:5px}
 .scn{font-size:11px;font-weight:700;min-width:22px;text-align:right}
@@ -95,10 +100,12 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .scf{height:3px;border-radius:2px}
 .opbtn{width:22px;height:22px;border-radius:5px;border:1px solid var(--b1);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t3);font-size:11px;transition:all .12s;flex-shrink:0}
 .opbtn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.opbtn.fav-btn{color:var(--t3)}
+.opbtn.fav-btn.on{color:var(--a2);border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.1)}
 .empty{text-align:center;padding:44px 20px;color:var(--t3)}
 .empty i{font-size:40px;display:block;margin-bottom:12px;opacity:.2}
 .tl{display:flex;flex-direction:column}
-.tlr{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid var(--b1)}
+.tlr{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid var(--b1);cursor:pointer}
 .tlr:last-child{border-bottom:none}
 .tld{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .tlb{flex:1;min-width:0}
@@ -117,7 +124,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .pinfo{font-size:11px;color:var(--t3)}
 .progw{background:var(--s3);border-radius:3px;height:5px;margin-bottom:11px;overflow:hidden}
 .progf{height:5px;background:linear-gradient(90deg,var(--blue),var(--b2c));border-radius:3px;transition:width .4s ease}
-.logbox{background:var(--s4);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;height:200px;overflow-y:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);line-height:1.8}
+.logbox{background:var(--s4);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;height:180px;overflow-y:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);line-height:1.8}
 .ll{display:block}
 .ll.ok   {color:var(--g3)}
 .ll.info {color:var(--b3c)}
@@ -136,89 +143,64 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .ah-sub{margin-left:auto;font-size:10px;color:var(--t3)}
 .ah-ref{padding:5px 10px;border-radius:var(--r);border:1px solid var(--b1);background:none;color:var(--t3);font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:'Inter',sans-serif}
 .ah-ref:hover{background:var(--s2);color:var(--t1)}
+.inp-kw{width:100%;background:var(--s3);border:1px solid var(--b1);border-radius:var(--r);padding:7px 10px;color:var(--t1);font-size:12px;font-family:'Inter',sans-serif;outline:none;transition:border-color .12s}
+.inp-kw:focus{border-color:var(--b2c)}
+.kw-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:10px;font-size:11px;margin:3px;background:var(--s4);color:var(--t2);border:1px solid var(--b1)}
+.kw-pill button{background:none;border:none;cursor:pointer;color:var(--t3);font-size:11px;padding:0;line-height:1;transition:color .1s}
+.kw-pill button:hover{color:var(--r3)}
+.nota-area{width:100%;background:var(--s3);border:1px solid var(--b1);border-radius:var(--r);padding:8px 10px;color:var(--t1);font-size:12px;font-family:'Inter',sans-serif;outline:none;resize:vertical;min-height:70px;transition:border-color .12s}
+.nota-area:focus{border-color:var(--b2c)}
 
-/* ── MODAL POPUP ─────────────────────────────────────────────── */
-#modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.65);
-  display:flex;align-items:center;justify-content:center;
-  z-index:1000;padding:20px;
-  opacity:0;pointer-events:none;transition:opacity .2s ease;
-}
+/* MODAL POPUP */
+#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s ease;}
 #modal-overlay.open{opacity:1;pointer-events:all;}
-#modal{
-  background:var(--s1);border:1px solid var(--b2);border-radius:16px;
-  width:100%;max-width:620px;max-height:88vh;
-  display:flex;flex-direction:column;
-  transform:translateY(12px);transition:transform .2s ease;
-  overflow:hidden;
-}
+#modal{background:var(--s1);border:1px solid var(--b2);border-radius:16px;width:100%;max-width:620px;max-height:88vh;display:flex;flex-direction:column;transform:translateY(12px);transition:transform .2s ease;overflow:hidden;}
 #modal-overlay.open #modal{transform:translateY(0);}
-.modal-head{
-  padding:16px 18px 14px;border-bottom:1px solid var(--b1);
-  display:flex;align-items:flex-start;gap:12px;flex-shrink:0;
-}
+.modal-head{padding:16px 18px 14px;border-bottom:1px solid var(--b1);display:flex;align-items:flex-start;gap:12px;flex-shrink:0;}
 .modal-head-body{flex:1;min-width:0;}
 .modal-titulo{font-size:14px;font-weight:600;color:var(--t1);line-height:1.5;margin-bottom:6px;}
 .modal-badges{display:flex;gap:6px;flex-wrap:wrap;}
-.modal-close{
-  width:30px;height:30px;border-radius:var(--r);background:var(--s3);
-  border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--t2);font-size:16px;flex-shrink:0;
-  transition:all .12s;margin-top:2px;
-}
+.modal-close{width:30px;height:30px;border-radius:var(--r);background:var(--s3);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:16px;flex-shrink:0;transition:all .12s;margin-top:2px;}
 .modal-close:hover{background:var(--r2);color:#fff;border-color:var(--r2);}
 .modal-body{overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:14px;}
 .modal-section{}
-.modal-section-title{
-  font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.1em;
-  text-transform:uppercase;margin-bottom:8px;
-  display:flex;align-items:center;gap:5px;
-}
+.modal-section-title{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
 .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .modal-field{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;}
 .modal-field-label{font-size:10px;color:var(--t3);margin-bottom:3px;}
 .modal-field-value{font-size:12px;color:var(--t1);font-weight:500;line-height:1.4;}
 .modal-field.full{grid-column:1/-1;}
-.modal-objeto{
-  background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);
-  padding:12px 14px;font-size:12px;color:var(--t2);line-height:1.7;
-}
-.modal-score-wrap{
-  background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);
-  padding:12px 14px;display:flex;align-items:center;gap:14px;
-}
+.modal-objeto{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:12px 14px;font-size:12px;color:var(--t2);line-height:1.7;}
+.modal-score-wrap{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;gap:14px;}
 .modal-score-num{font-size:32px;font-weight:700;line-height:1;letter-spacing:-.03em;}
 .modal-score-info{flex:1;}
 .modal-score-bar-bg{height:6px;background:var(--s4);border-radius:3px;overflow:hidden;margin-top:6px;}
 .modal-score-bar-fill{height:6px;border-radius:3px;}
 .modal-kws{display:flex;flex-wrap:wrap;gap:5px;}
-.modal-kw{
-  font-size:10px;padding:3px 9px;border-radius:10px;
-  background:var(--s3);color:var(--t2);border:1px solid var(--b1);
-}
-.modal-footer{
-  padding:12px 18px;border-top:1px solid var(--b1);
-  display:flex;gap:8px;flex-shrink:0;
-}
-.modal-btn-primary{
-  flex:1;padding:9px;background:var(--blue);color:#fff;border:none;
-  border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;
-  font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;
-  gap:7px;transition:all .12s;text-decoration:none;
-}
+.modal-kw{font-size:10px;padding:3px 9px;border-radius:10px;background:var(--s3);color:var(--t2);border:1px solid var(--b1);}
+.modal-footer{padding:12px 18px;border-top:1px solid var(--b1);display:flex;gap:8px;flex-shrink:0;}
+.modal-btn-primary{flex:1;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .12s;text-decoration:none;}
 .modal-btn-primary:hover{background:#1d4ed8;}
-.modal-btn-sec{
-  padding:9px 14px;background:var(--s3);color:var(--t2);border:1px solid var(--b1);
-  border-radius:var(--r);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;
-  display:flex;align-items:center;gap:5px;transition:all .12s;
-}
+.modal-btn-sec{padding:9px 14px;background:var(--s3);color:var(--t2);border:1px solid var(--b1);border-radius:var(--r);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:5px;transition:all .12s;}
 .modal-btn-sec:hover{background:var(--s4);color:var(--t1);}
+.modal-btn-fav{padding:9px 14px;border-radius:var(--r);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:5px;transition:all .12s;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.08);color:var(--a3);}
+.modal-btn-fav:hover{background:rgba(245,158,11,.15);}
+.modal-btn-fav.on{background:rgba(245,158,11,.18);border-color:var(--a2);}
+.urgente-banner{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:var(--r);padding:8px 12px;font-size:11px;color:var(--r3);display:flex;align-items:center;gap:7px;}
 
-.urgente-banner{
-  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);
-  border-radius:var(--r);padding:8px 12px;font-size:11px;color:var(--r3);
-  display:flex;align-items:center;gap:7px;
-}
+/* MODAL KW */
+#kw-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;z-index:1100;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s ease;}
+#kw-overlay.open{opacity:1;pointer-events:all;}
+#kw-modal{background:var(--s1);border:1px solid var(--b2);border-radius:16px;width:100%;max-width:580px;max-height:85vh;display:flex;flex-direction:column;transform:translateY(10px);transition:transform .2s ease;overflow:hidden;}
+#kw-overlay.open #kw-modal{transform:translateY(0);}
+.kw-head{padding:16px 18px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;}
+.kw-body{overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:16px;}
+.kw-section{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:13px 14px;}
+.kw-section-head{display:flex;align-items:center;gap:7px;margin-bottom:10px;}
+.kw-section-title{font-size:12px;font-weight:600;}
+.kw-pills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;min-height:28px;}
+.kw-add{display:flex;gap:7px;}
+.kw-footer{padding:12px 18px;border-top:1px solid var(--b1);display:flex;justify-content:flex-end;gap:8px;}
 
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin .7s linear infinite;display:inline-block}
@@ -239,11 +221,13 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
     <button class="nb"        id="nb-tech"  onclick="setArea('tech')"> <i class="ti ti-cpu"               style="font-size:15px" aria-hidden="true"></i> Tecnologia      <span class="nba" id="na-tech"  style="background:var(--g2)">0</span></button>
     <button class="nb"        id="nb-trein" onclick="setArea('trein')"><i class="ti ti-school"             style="font-size:15px" aria-hidden="true"></i> Treinamento     <span class="nba" id="na-trein" style="background:var(--g2)">0</span></button>
     <button class="nb"        id="nb-rh"    onclick="setArea('rh')">   <i class="ti ti-users"             style="font-size:15px" aria-hidden="true"></i> Programas de RH <span class="nba" id="na-rh"    style="background:var(--p2)">0</span></button>
+    <button class="nb"        id="nb-fav"   onclick="setArea('fav')">  <i class="ti ti-bookmark"          style="font-size:15px" aria-hidden="true"></i> Salvos          <span class="nba" id="na-fav"   style="background:var(--a2)">0</span></button>
   </div>
   <div class="sep"></div>
   <div style="padding:0 0 4px">
     <div class="ns">Ferramentas</div>
     <button class="nb" onclick="setView('captura')"><i class="ti ti-refresh"  style="font-size:15px" aria-hidden="true"></i> Capturar editais</button>
+    <button class="nb" onclick="abrirKW()">         <i class="ti ti-tags"     style="font-size:15px" aria-hidden="true"></i> Palavras-chave</button>
     <button class="nb" onclick="exportCSV()">       <i class="ti ti-download" style="font-size:15px" aria-hidden="true"></i> Exportar CSV</button>
   </div>
   <div class="sf">
@@ -257,11 +241,13 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
     <button class="at"       id="tab-tech"  onclick="setArea('tech')"> <i class="ti ti-cpu"               style="font-size:13px" aria-hidden="true"></i> Tecnologia</button>
     <button class="at"       id="tab-trein" onclick="setArea('trein')"><i class="ti ti-school"             style="font-size:13px" aria-hidden="true"></i> Treinamento</button>
     <button class="at"       id="tab-rh"    onclick="setArea('rh')">   <i class="ti ti-users"             style="font-size:13px" aria-hidden="true"></i> Programas de RH</button>
+    <button class="at"       id="tab-fav"   onclick="setArea('fav')">  <i class="ti ti-bookmark"          style="font-size:13px" aria-hidden="true"></i> Salvos</button>
     <div class="sp"></div>
     <div class="sw">
       <i class="ti ti-search" style="font-size:13px;color:var(--t3)" aria-hidden="true"></i>
       <input placeholder="Buscar edital ou órgão..." id="inp-busca" oninput="dBusca(this.value)" aria-label="Buscar"/>
     </div>
+    <button class="ib" onclick="abrirKW()" title="Palavras-chave"><i class="ti ti-tags" aria-hidden="true"></i></button>
     <button class="ib" onclick="setView('captura')" title="Capturar"><i class="ti ti-refresh" aria-hidden="true"></i></button>
     <button class="ib" title="Alta prioridade"><i class="ti ti-bell" aria-hidden="true"></i><div class="nd" id="nd">0</div></button>
   </div>
@@ -269,7 +255,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 </div>
 </div>
 
-<!-- ── MODAL POPUP ─────────────────────────────────────────── -->
+<!-- MODAL EDITAL -->
 <div id="modal-overlay" onclick="fecharModal(event)">
   <div id="modal">
     <div class="modal-head">
@@ -284,9 +270,27 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
   </div>
 </div>
 
+<!-- MODAL PALAVRAS-CHAVE -->
+<div id="kw-overlay" onclick="fecharKW(event)">
+  <div id="kw-modal">
+    <div class="kw-head">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--t1)">Palavras-chave por área</div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px">Personalize os termos usados na classificação de editais</div>
+      </div>
+      <button class="modal-close" onclick="closeKW()"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
+    <div class="kw-body" id="kw-body"></div>
+    <div class="kw-footer">
+      <button class="btns" onclick="resetKW()"><i class="ti ti-refresh" aria-hidden="true"></i> Restaurar padrão</button>
+      <button class="btnp" style="width:auto;padding:8px 18px" onclick="salvarKW()"><i class="ti ti-check" aria-hidden="true"></i> Salvar</button>
+    </div>
+  </div>
+</div>
+
 <script>
-// ── PALAVRAS-CHAVE ────────────────────────────────────────────────
-const KW = {
+// ── PALAVRAS-CHAVE PADRÃO ─────────────────────────────────────────
+const KW_DEFAULT = {
   tecnologia:{
     label:'Tecnologia',c:'var(--tech-c)',bg:'var(--tech-bg)',t:'var(--tech-t)',icon:'ti-cpu',
     peso:['software','sistema de informação','sistema integrado','sistema web','desenvolvimento de sistema',
@@ -339,6 +343,29 @@ const KW = {
   },
 };
 
+// ── PALAVRAS-CHAVE (carrega do localStorage ou usa padrão) ────────
+function carregarKW() {
+  try {
+    const saved = localStorage.getItem('radar_kw');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      const kw = {};
+      for (const area of Object.keys(KW_DEFAULT)) {
+        kw[area] = {
+          ...KW_DEFAULT[area],
+          peso:  parsed[area]?.peso  || KW_DEFAULT[area].peso,
+          bonus: parsed[area]?.bonus || KW_DEFAULT[area].bonus,
+        };
+      }
+      return kw;
+    }
+  } catch {}
+  return JSON.parse(JSON.stringify(KW_DEFAULT));
+}
+
+let KW = carregarKW();
+
+// ── CLOUDFLARE WORKER ─────────────────────────────────────────────
 const WORKER = 'https://radar-pncp.igorecosta1.workers.dev';
 
 async function buscarPNCP(dias=3){
@@ -348,6 +375,7 @@ async function buscarPNCP(dias=3){
   return Array.isArray(j?.data)?j.data:[];
 }
 
+// ── CLASSIFICAÇÃO ─────────────────────────────────────────────────
 function classificar(texto){
   if(!texto)return null;
   const t=texto.toLowerCase();
@@ -368,8 +396,9 @@ function normalizar(raw){
   const org=raw.orgaoEntidade||{};
   const uni=raw.unidadeOrgao||{};
   const num=raw.numeroControlePNCP||`${org.cnpj||'x'}-${raw.anoCompra}-${raw.sequencialCompra}`;
+  const fonte=raw._fonte||'PNCP';
   return{
-    id:num,
+    id:num,fonte,
     objeto:(raw.objetoCompra||'').trim(),
     orgao:org.razaoSocial||uni.nomeUnidade||'',
     cnpj:org.cnpj||'',
@@ -384,36 +413,68 @@ function normalizar(raw){
     situacao:raw.situacaoCompraNome||'',
     info_complementar:raw.informacaoComplementar||'',
     link:raw.linkSistemaOrigem||`https://pncp.gov.br/app/editais/${num}`,
-    link_pncp:`https://pncp.gov.br/app/editais/${num}`,
   };
 }
 
+// ── FAVORITOS ─────────────────────────────────────────────────────
+function getFavs(){try{return JSON.parse(localStorage.getItem('radar_favs')||'[]');}catch{return[];}}
+function saveFavs(a){localStorage.setItem('radar_favs',JSON.stringify(a));}
+function isFav(id){return getFavs().includes(id);}
+function toggleFav(id){
+  let favs=getFavs();
+  if(favs.includes(id))favs=favs.filter(f=>f!==id);
+  else favs.push(id);
+  saveFavs(favs);
+  atualizarBadgeFav();
+  return favs.includes(id);
+}
+function atualizarBadgeFav(){
+  const favs=getFavs();
+  const n=S.editais.filter(e=>favs.includes(e.id)).length;
+  document.getElementById('na-fav').textContent=n;
+}
+
+// ── NOTAS ─────────────────────────────────────────────────────────
+function getNota(id){try{return localStorage.getItem('radar_nota_'+id)||'';}catch{return '';}}
+function saveNota(id,txt){
+  if(txt.trim())localStorage.setItem('radar_nota_'+id,txt);
+  else localStorage.removeItem('radar_nota_'+id);
+}
+
 // ── ESTADO ────────────────────────────────────────────────────────
-const S={area:'all',view:'dash',pagina:1,busca:'',pri:'',uf:'',editais:[],stats:{},capturado_em:null};
+const S={area:'all',view:'dash',pagina:1,busca:'',pri:'',uf:'',dias:'',editais:[],stats:{},capturado_em:null};
 const ACFG={
   all: {label:'Todas as áreas',c:'var(--b2c)', bg:'rgba(37,99,235,.12)', t:'var(--b3c)',   icon:'ti-layout-dashboard'},
   tech:{label:'Tecnologia',    c:'var(--blue)',bg:'var(--tech-bg)',       t:'var(--tech-t)',icon:'ti-cpu'},
   trein:{label:'Treinamento',  c:'var(--g2)', bg:'var(--trein-bg)',      t:'var(--trein-t)',icon:'ti-school'},
   rh:  {label:'Programas de RH',c:'var(--p2)',bg:'var(--rh-bg)',         t:'var(--rh-t)', icon:'ti-users'},
+  fav: {label:'Salvos',        c:'var(--a2)', bg:'rgba(245,158,11,.12)', t:'var(--a3)',    icon:'ti-bookmark'},
 };
 
 renderDash();
 
 function setArea(a){
   S.area=a;S.pagina=1;S.view='dash';
-  ['all','tech','trein','rh'].forEach(k=>{
-    document.getElementById('nb-'+k).className='nb'+(k===a?' a-'+a:'');
-    document.getElementById('tab-'+k).className='at'+(k===a?' t'+a:'');
+  ['all','tech','trein','rh','fav'].forEach(k=>{
+    const nb=document.getElementById('nb-'+k);
+    const tb=document.getElementById('tab-'+k);
+    if(nb)nb.className='nb'+(k===a?' a-'+a:'');
+    if(tb)tb.className='at'+(k===a?' t'+a:'');
   });
   renderDash();
 }
 function setView(v){S.view=v;v==='captura'?renderCaptura():renderDash();}
 
+const AREA_MAP={tech:'tecnologia',trein:'treinamento',rh:'rh'};
+
 function filtrar(){
   let d=S.editais;
-  if(S.area!=='all')d=d.filter(e=>e.area===S.area);
-  if(S.pri)d=d.filter(e=>e.prioridade===S.pri);
-  if(S.uf)d=d.filter(e=>e.uf===S.uf);
+  const favs=getFavs();
+  if(S.area==='fav') return d.filter(e=>favs.includes(e.id));
+  if(S.area!=='all'){const a=AREA_MAP[S.area]||S.area;d=d.filter(e=>e.area===a);}
+  if(S.pri)  d=d.filter(e=>e.prioridade===S.pri);
+  if(S.uf)   d=d.filter(e=>e.uf===S.uf);
+  if(S.dias) d=d.filter(e=>e.data_publicacao>=dHa(parseInt(S.dias)));
   if(S.busca){const q=S.busca.toLowerCase();d=d.filter(e=>e.objeto.toLowerCase().includes(q)||(e.orgao||'').toLowerCase().includes(q));}
   return d;
 }
@@ -422,7 +483,7 @@ function renderDash(){
   const A=ACFG[S.area],todos=filtrar(),st=S.stats;
   const ufs=[...new Set(S.editais.map(e=>e.uf).filter(Boolean))].sort();
   const PG=16,totalPags=Math.ceil(todos.length/PG),page=todos.slice((S.pagina-1)*PG,S.pagina*PG);
-  const nArea=S.area==='all'?(st.total||0):(st[S.area==='tech'?'tecnologia':S.area==='trein'?'treinamento':'rh']||0);
+  const nArea=S.area==='all'?(st.total||0):S.area==='fav'?todos.length:(st[AREA_MAP[S.area]||S.area]||0);
   const nAlta=todos.filter(e=>e.prioridade==='Alta').length;
   const nUrg=todos.filter(e=>diasAte(e.data_encerramento)>=0&&diasAte(e.data_encerramento)<=7).length;
   const nNov=todos.filter(e=>e.data_publicacao>=dHa(7)).length;
@@ -435,7 +496,7 @@ function renderDash(){
       <span class="ah-sub">${S.capturado_em?'Capturado às '+new Date(S.capturado_em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'Nenhuma captura ainda'}</span>
     </div>
     <div class="mets">
-      <div class="mc"><div class="mc-l">Editais ${S.area==='all'?'totais':A.label.toLowerCase()}</div><div class="mc-v" style="color:${A.c}">${nArea}</div><div class="mc-s">capturados do PNCP</div></div>
+      <div class="mc"><div class="mc-l">Editais ${S.area==='all'?'totais':S.area==='fav'?'salvos':A.label.toLowerCase()}</div><div class="mc-v" style="color:${A.c}">${nArea}</div><div class="mc-s">capturados do PNCP</div></div>
       <div class="mc"><div class="mc-l">Alta prioridade</div><div class="mc-v" style="color:var(--r3)">${nAlta}</div><div class="mc-s">score alto</div></div>
       <div class="mc"><div class="mc-l">Prazo urgente</div><div class="mc-v" style="color:var(--a3)">${nUrg}</div><div class="mc-s">encerram em ≤ 7 dias</div></div>
       <div class="mc"><div class="mc-l">Recentes</div><div class="mc-v" style="color:var(--g3)">${nNov}</div><div class="mc-s">nos últimos 7 dias</div></div>
@@ -450,6 +511,12 @@ function renderDash(){
       <select class="fs" onchange="S.uf=this.value;S.pagina=1;renderDash()">
         <option value="">Todos os estados</option>
         ${ufs.map(u=>`<option ${S.uf===u?'selected':''}>${u}</option>`).join('')}
+      </select>
+      <select class="fs" onchange="S.dias=this.value;S.pagina=1;renderDash()">
+        <option value="">Qualquer período</option>
+        <option value="1"  ${S.dias==='1' ?'selected':''}>Hoje</option>
+        <option value="7"  ${S.dias==='7' ?'selected':''}>Últimos 7 dias</option>
+        <option value="30" ${S.dias==='30'?'selected':''}>Últimos 30 dias</option>
       </select>
       ${S.area==='all'?`<select class="fs" onchange="if(this.value)setArea(this.value)">
         <option value="">Filtrar por área</option>
@@ -485,28 +552,42 @@ function opCard(op){
   const tc={tecnologia:'tag-tech',treinamento:'tag-trein',rh:'tag-rh'}[op.area]||'';
   const A=ACFG[op.area]||ACFG.all;
   const kws=op.palavras||[];
-  return`<div class="op fi" onclick="abrirModal(${idx})">
+  const fav=isFav(op.id);
+  const nota=getNota(op.id);
+  const fonte=op.fonte||'PNCP';
+  return`<div class="op fi${fav?' favorited':''}" onclick="abrirModal(${idx})">
     <div class="op-top"><div class="op-tit">${esc(op.objeto)}</div><span class="pri ${pc}">${op.prioridade}</span></div>
     <div class="op-org">${esc(op.orgao||'—')}${op.uf?' · '+op.uf:''}</div>
     <div class="op-foot">
       <span class="tag ${tc}">${A.label}</span>
-      ${op.modalidade?`<span class="tag">${op.modalidade.length>22?op.modalidade.slice(0,20)+'…':op.modalidade}</span>`:''}
+      <span class="tag ${fonte==='SIASG'?'tag-siasg':'tag-pncp'}">${fonte}</span>
+      ${op.modalidade?`<span class="tag">${op.modalidade.length>20?op.modalidade.slice(0,18)+'…':op.modalidade}</span>`:''}
       <span class="dias"><i class="ti ti-calendar" aria-hidden="true" style="font-size:10px"></i> ${dias>=0?dias+'d':'encerrado'}</span>
-      ${kws[0]?`<span class="tag" style="opacity:.75">${kws[0]}</span>`:''}
+      ${nota?`<span class="tag" style="color:var(--a3);border-color:rgba(245,158,11,.3)"><i class="ti ti-notes" aria-hidden="true" style="font-size:10px"></i></span>`:''}
       <div class="scw">
         <span class="scn" style="color:${scC}">${sc}</span>
         <div class="scb"><div class="scf" style="width:${Math.min(sc*2.5,100)}%;background:${scC}"></div></div>
+        <button class="opbtn fav-btn${fav?' on':''}" onclick="event.stopPropagation();toggleFavCard(${idx},this)" title="${fav?'Remover dos salvos':'Salvar'}"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
         <button class="opbtn" onclick="event.stopPropagation();abrirModal(${idx})" title="Ver detalhes"><i class="ti ti-eye" aria-hidden="true"></i></button>
       </div>
     </div>
   </div>`;
 }
 
-// ── MODAL ─────────────────────────────────────────────────────────
+function toggleFavCard(idx,btn){
+  const op=S.editais[idx];
+  if(!op)return;
+  const on=toggleFav(op.id);
+  btn.className='opbtn fav-btn'+(on?' on':'');
+  const card=btn.closest('.op');
+  if(card){card.classList.toggle('favorited',on);}
+  atualizarBadgeFav();
+}
+
+// ── MODAL EDITAL ──────────────────────────────────────────────────
 function abrirModal(idx){
   const op=S.editais[idx];
   if(!op)return;
-
   const A=ACFG[op.area]||ACFG.all;
   const pc={Alta:'pA',Média:'pM',Baixa:'pB'}[op.prioridade]||'pB';
   const dias=diasAte(op.data_encerramento);
@@ -515,117 +596,205 @@ function abrirModal(idx){
   const scLabel=sc>=30?'Alta aderência':sc>=13?'Média aderência':'Baixa aderência';
   const kws=op.palavras||[];
   const urgente=dias>=0&&dias<=7;
+  const fav=isFav(op.id);
+  const nota=getNota(op.id);
+  const fonte=op.fonte||'PNCP';
 
-  // Cabeçalho
   document.getElementById('modal-titulo').textContent=op.objeto||'—';
   document.getElementById('modal-badges').innerHTML=`
     <span class="tag ${({tecnologia:'tag-tech',treinamento:'tag-trein',rh:'tag-rh'})[op.area]||''}">${A.label}</span>
     <span class="pri ${pc}">${op.prioridade}</span>
+    <span class="tag ${fonte==='SIASG'?'tag-siasg':'tag-pncp'}">${fonte}</span>
     ${op.modalidade?`<span class="tag">${op.modalidade}</span>`:''}
     ${op.situacao?`<span class="tag">${op.situacao}</span>`:''}
   `;
 
-  // Corpo
   document.getElementById('modal-body').innerHTML=`
     ${urgente?`<div class="urgente-banner"><i class="ti ti-alert-triangle" aria-hidden="true" style="font-size:16px;flex-shrink:0"></i> Prazo urgente — encerra em ${dias} dia${dias===1?'':'s'} (${fmtD(op.data_encerramento)})</div>`:''}
-
     <div class="modal-section">
       <div class="modal-section-title"><i class="ti ti-building" aria-hidden="true"></i> Órgão responsável</div>
       <div class="modal-grid">
-        <div class="modal-field full">
-          <div class="modal-field-label">Razão Social</div>
-          <div class="modal-field-value">${esc(op.orgao||'—')}</div>
-        </div>
+        <div class="modal-field full"><div class="modal-field-label">Razão Social</div><div class="modal-field-value">${esc(op.orgao||'—')}</div></div>
         ${op.cnpj?`<div class="modal-field"><div class="modal-field-label">CNPJ</div><div class="modal-field-value">${esc(op.cnpj)}</div></div>`:''}
         ${op.municipio?`<div class="modal-field"><div class="modal-field-label">Município / UF</div><div class="modal-field-value">${esc(op.municipio)}${op.uf?' — '+op.uf:''}</div></div>`:''}
       </div>
     </div>
-
     <div class="modal-section">
       <div class="modal-section-title"><i class="ti ti-file-text" aria-hidden="true"></i> Objeto da licitação</div>
       <div class="modal-objeto">${esc(op.objeto||'—')}</div>
     </div>
-
-    ${op.info_complementar?`
-    <div class="modal-section">
+    ${op.info_complementar?`<div class="modal-section">
       <div class="modal-section-title"><i class="ti ti-info-circle" aria-hidden="true"></i> Informação complementar</div>
       <div class="modal-objeto" style="max-height:120px;overflow-y:auto;font-size:11px;color:var(--t3)">${esc(op.info_complementar)}</div>
     </div>`:''}
-
     <div class="modal-section">
       <div class="modal-section-title"><i class="ti ti-calendar" aria-hidden="true"></i> Datas e prazos</div>
       <div class="modal-grid">
-        <div class="modal-field">
-          <div class="modal-field-label">Publicado em</div>
-          <div class="modal-field-value">${fmtDFull(op.data_publicacao)}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-field-label">Abertura de propostas</div>
-          <div class="modal-field-value">${fmtDFull(op.data_abertura)}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-field-label">Encerramento</div>
-          <div class="modal-field-value" style="color:${urgente?'var(--r3)':'var(--t1)'}">${fmtDFull(op.data_encerramento)}${dias>=0?' ('+dias+'d)':' (encerrado)'}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-field-label">Valor estimado</div>
-          <div class="modal-field-value" style="color:var(--g3)">${op.valor?'R$ '+Number(op.valor).toLocaleString('pt-BR',{minimumFractionDigits:2}):'Não informado'}</div>
-        </div>
+        <div class="modal-field"><div class="modal-field-label">Publicado em</div><div class="modal-field-value">${fmtDFull(op.data_publicacao)}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Abertura de propostas</div><div class="modal-field-value">${fmtDFull(op.data_abertura)}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Encerramento</div><div class="modal-field-value" style="color:${urgente?'var(--r3)':'var(--t1)'}">${fmtDFull(op.data_encerramento)}${dias>=0?' ('+dias+'d)':' (encerrado)'}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Valor estimado</div><div class="modal-field-value" style="color:var(--g3)">${op.valor?'R$ '+Number(op.valor).toLocaleString('pt-BR',{minimumFractionDigits:2}):'Não informado'}</div></div>
       </div>
     </div>
-
     <div class="modal-section">
-      <div class="modal-section-title"><i class="ti ti-brain" aria-hidden="true"></i> Score de aderência IA</div>
+      <div class="modal-section-title"><i class="ti ti-brain" aria-hidden="true"></i> Score de aderência</div>
       <div class="modal-score-wrap">
         <div class="modal-score-num" style="color:${scC}">${sc}</div>
         <div class="modal-score-info">
           <div style="font-size:12px;font-weight:600;color:var(--t1)">${scLabel}</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:2px">Baseado em palavras-chave identificadas no objeto</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px">Baseado nas palavras-chave da área</div>
           <div class="modal-score-bar-bg"><div class="modal-score-bar-fill" style="width:${Math.min(sc*2.5,100)}%;background:${scC}"></div></div>
         </div>
       </div>
       ${kws.length?`<div style="margin-top:8px"><div style="font-size:10px;color:var(--t3);margin-bottom:5px">Palavras-chave identificadas:</div><div class="modal-kws">${kws.map(k=>`<span class="modal-kw">${esc(k)}</span>`).join('')}</div></div>`:''}
     </div>
-
-    ${op.numero_processo?`
     <div class="modal-section">
+      <div class="modal-section-title"><i class="ti ti-notes" aria-hidden="true"></i> Minha nota</div>
+      <textarea class="nota-area" id="nota-txt" placeholder="Adicione uma nota interna sobre esta oportunidade...">${esc(nota)}</textarea>
+      <button class="btns" style="margin-top:6px" onclick="salvarNotaModal('${esc(op.id)}')"><i class="ti ti-device-floppy" aria-hidden="true"></i> Salvar nota</button>
+    </div>
+    ${op.numero_processo?`<div class="modal-section">
       <div class="modal-section-title"><i class="ti ti-hash" aria-hidden="true"></i> Identificação</div>
       <div class="modal-grid">
-        <div class="modal-field full">
-          <div class="modal-field-label">Número do processo / controle PNCP</div>
-          <div class="modal-field-value" style="font-family:'JetBrains Mono',monospace;font-size:11px">${esc(op.numero_processo||op.id||'—')}</div>
-        </div>
+        <div class="modal-field full"><div class="modal-field-label">Número do processo / controle PNCP</div>
+        <div class="modal-field-value" style="font-family:'JetBrains Mono',monospace;font-size:11px">${esc(op.numero_processo||op.id||'—')}</div></div>
       </div>
     </div>`:''}
   `;
 
-  // Rodapé
   document.getElementById('modal-footer').innerHTML=`
-    ${op.link?`<a class="modal-btn-primary" href="${esc(op.link)}" target="_blank" rel="noopener">
-      <i class="ti ti-external-link" aria-hidden="true"></i> Abrir edital no PNCP
-    </a>`:''}
-    <button class="modal-btn-sec" onclick="closeModal()">
-      <i class="ti ti-x" aria-hidden="true"></i> Fechar
+    <button id="modal-fav-btn" class="modal-btn-fav${fav?' on':''}" onclick="toggleFavModal('${esc(op.id)}')">
+      <i class="ti ti-bookmark" aria-hidden="true"></i> ${fav?'Salvo':'Salvar'}
     </button>
+    ${op.link?`<a class="modal-btn-primary" href="${esc(op.link)}" target="_blank" rel="noopener"><i class="ti ti-external-link" aria-hidden="true"></i> Abrir no PNCP</a>`:''}
+    <button class="modal-btn-sec" onclick="closeModal()"><i class="ti ti-x" aria-hidden="true"></i> Fechar</button>
   `;
 
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
 
-function closeModal(){
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow='';
+function salvarNotaModal(id){
+  const txt=document.getElementById('nota-txt')?.value||'';
+  saveNota(id,txt);
+  const btn=document.querySelector('#modal-body .btns');
+  if(btn){const orig=btn.innerHTML;btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i> Salvo!';setTimeout(()=>btn.innerHTML=orig,1500);}
 }
 
-function fecharModal(e){
-  if(e.target===document.getElementById('modal-overlay'))closeModal();
+function toggleFavModal(id){
+  const on=toggleFav(id);
+  const btn=document.getElementById('modal-fav-btn');
+  if(btn){btn.className='modal-btn-fav'+(on?' on':'');btn.innerHTML=`<i class="ti ti-bookmark" aria-hidden="true"></i> ${on?'Salvo':'Salvar'}`;}
+  const idx=S.editais.findIndex(e=>e.id===id);
+  const card=document.querySelectorAll('.op')[idx%16];
+  if(card)card.classList.toggle('favorited',on);
+  atualizarBadgeFav();
 }
 
-// Fechar com ESC
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
+function fecharModal(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeKW();}});
 
+// ── MODAL PALAVRAS-CHAVE ──────────────────────────────────────────
+let KW_EDIT = {};
+
+function abrirKW(){
+  KW_EDIT = JSON.parse(JSON.stringify({
+    tecnologia:{peso:[...KW.tecnologia.peso],bonus:[...KW.tecnologia.bonus]},
+    treinamento:{peso:[...KW.treinamento.peso],bonus:[...KW.treinamento.bonus]},
+    rh:{peso:[...KW.rh.peso],bonus:[...KW.rh.bonus]},
+  }));
+  renderKWModal();
+  document.getElementById('kw-overlay').classList.add('open');
+}
+
+function renderKWModal(){
+  const areas=[
+    {key:'tecnologia',label:'Tecnologia',t:'var(--tech-t)',bg:'var(--tech-bg)'},
+    {key:'treinamento',label:'Treinamento',t:'var(--trein-t)',bg:'var(--trein-bg)'},
+    {key:'rh',label:'Programas de RH',t:'var(--rh-t)',bg:'var(--rh-bg)'},
+  ];
+  document.getElementById('kw-body').innerHTML=areas.map(a=>`
+    <div class="kw-section">
+      <div class="kw-section-head">
+        <div class="kw-section-title" style="color:${a.t}">${a.label}</div>
+        <span style="font-size:10px;color:var(--t3);margin-left:auto">${KW_EDIT[a.key].peso.length} termos principais · ${KW_EDIT[a.key].bonus.length} bônus</span>
+      </div>
+      <div style="font-size:10px;color:var(--t3);margin-bottom:5px">Termos principais (+10 pts cada)</div>
+      <div class="kw-pills" id="pills-peso-${a.key}">
+        ${KW_EDIT[a.key].peso.map((kw,i)=>`<span class="kw-pill"><span>${esc(kw.trim())}</span><button onclick="remKW('${a.key}','peso',${i})" title="Remover"><i class="ti ti-x" aria-hidden="true"></i></button></span>`).join('')}
+      </div>
+      <div class="kw-add">
+        <input class="inp-kw" id="inp-peso-${a.key}" placeholder="Adicionar termo principal..." onkeydown="if(event.key==='Enter')addKW('${a.key}','peso')"/>
+        <button class="btns" onclick="addKW('${a.key}','peso')" style="padding:7px 12px"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      </div>
+      <div style="font-size:10px;color:var(--t3);margin:10px 0 5px">Termos bônus (+3 pts cada)</div>
+      <div class="kw-pills" id="pills-bonus-${a.key}">
+        ${KW_EDIT[a.key].bonus.map((kw,i)=>`<span class="kw-pill"><span>${esc(kw.trim())}</span><button onclick="remKW('${a.key}','bonus',${i})" title="Remover"><i class="ti ti-x" aria-hidden="true"></i></button></span>`).join('')}
+      </div>
+      <div class="kw-add">
+        <input class="inp-kw" id="inp-bonus-${a.key}" placeholder="Adicionar termo bônus..." onkeydown="if(event.key==='Enter')addKW('${a.key}','bonus')"/>
+        <button class="btns" onclick="addKW('${a.key}','bonus')" style="padding:7px 12px"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addKW(area,tipo){
+  const inp=document.getElementById(`inp-${tipo}-${area}`);
+  const val=(inp?.value||'').trim().toLowerCase();
+  if(!val)return;
+  if(!KW_EDIT[area][tipo].includes(val)){
+    KW_EDIT[area][tipo].push(val);
+    renderKWModal();
+    setTimeout(()=>{const i=document.getElementById(`inp-${tipo}-${area}`);if(i)i.focus();},50);
+  }
+  if(inp)inp.value='';
+}
+
+function remKW(area,tipo,idx){
+  KW_EDIT[area][tipo].splice(idx,1);
+  renderKWModal();
+}
+
+function salvarKW(){
+  for(const area of Object.keys(KW_EDIT)){
+    KW[area].peso=[...KW_EDIT[area].peso];
+    KW[area].bonus=[...KW_EDIT[area].bonus];
+  }
+  localStorage.setItem('radar_kw',JSON.stringify({
+    tecnologia:{peso:KW.tecnologia.peso,bonus:KW.tecnologia.bonus},
+    treinamento:{peso:KW.treinamento.peso,bonus:KW.treinamento.bonus},
+    rh:{peso:KW.rh.peso,bonus:KW.rh.bonus},
+  }));
+  closeKW();
+  if(S.editais.length){
+    S.editais=S.editais.map(e=>{
+      const cl=classificar(e.objeto);
+      if(!cl)return e;
+      return{...e,area:cl.area,score:cl.score,prioridade:prioridade(cl.score),palavras:cl.palavras};
+    }).filter(e=>e.area);
+    S.editais.sort((a,b)=>b.score-a.score);
+    renderDash();
+  }
+}
+
+function resetKW(){
+  if(!confirm('Restaurar todas as palavras-chave para o padrão?'))return;
+  KW_EDIT={
+    tecnologia:{peso:[...KW_DEFAULT.tecnologia.peso],bonus:[...KW_DEFAULT.tecnologia.bonus]},
+    treinamento:{peso:[...KW_DEFAULT.treinamento.peso],bonus:[...KW_DEFAULT.treinamento.bonus]},
+    rh:{peso:[...KW_DEFAULT.rh.peso],bonus:[...KW_DEFAULT.rh.bonus]},
+  };
+  renderKWModal();
+}
+
+function closeKW(){document.getElementById('kw-overlay').classList.remove('open');}
+function fecharKW(e){if(e.target===document.getElementById('kw-overlay'))closeKW();}
+
+// ── RENDER AUXILIARES ─────────────────────────────────────────────
 function emptyState(){
+  if(S.area==='fav')return`<div class="empty"><i class="ti ti-bookmark" aria-hidden="true"></i>Nenhum edital salvo ainda.<br>Clique no ícone <i class="ti ti-bookmark" style="font-size:13px;opacity:.7" aria-hidden="true"></i> em qualquer card para salvar.</div>`;
   if(!S.capturado_em)return`<div class="empty"><i class="ti ti-radar" aria-hidden="true"></i>Nenhum edital ainda.<br>Clique em <strong>"Capturar editais"</strong> para buscar.<br><br>
     <button class="btnp" style="width:auto;padding:8px 20px;margin:auto" onclick="setView('captura')"><i class="ti ti-player-play" aria-hidden="true"></i> Capturar agora</button></div>`;
   return`<div class="empty"><i class="ti ti-search" aria-hidden="true"></i>Nenhum resultado para os filtros.</div>`;
@@ -637,7 +806,7 @@ function renderTL(editais){
   return'<div class="tl">'+s.map(e=>{
     const d=diasAte(e.data_encerramento);const c=d<=7?'var(--r2)':d<=15?'var(--a2)':'var(--g2)';
     const idx=S.editais.indexOf(e);
-    return`<div class="tlr" style="cursor:pointer" onclick="abrirModal(${idx})">
+    return`<div class="tlr" onclick="abrirModal(${idx})">
       <div class="tld" style="background:${c}"></div>
       <div class="tlb"><div class="tln">${esc((e.objeto||'').slice(0,44))}…</div>
       <div class="tls">${esc(e.orgao||'')}${e.uf?' · '+e.uf:''} · ${fmtD(e.data_encerramento)}</div></div>
@@ -652,31 +821,36 @@ function renderBarras(){
   return cfgs.map(c=>`<div class="abr"><span class="abl">${c.l}</span><div class="abt"><div class="abf" style="width:${Math.round(c.n/max*100)}%;background:${c.c}"></div></div><span class="abn">${c.n}</span></div>`).join('');
 }
 
+// ── RENDER CAPTURA ────────────────────────────────────────────────
 function renderCaptura(){
   document.getElementById('ct').innerHTML=`
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div>
         <div class="card" style="margin-bottom:12px">
           <div class="ch"><i class="ti ti-world" aria-hidden="true"></i> Fonte de dados</div>
-          <div style="display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(5,150,105,.3);border-radius:var(--r);background:rgba(5,150,105,.08)">
+          <div style="display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(5,150,105,.3);border-radius:var(--r);background:rgba(5,150,105,.08);margin-bottom:6px">
             <div style="width:8px;height:8px;border-radius:50%;background:var(--g2);flex-shrink:0"></div>
             <div><div style="font-size:12px;font-weight:500">PNCP via Cloudflare Worker</div><div style="font-size:10px;color:var(--t3)">IP brasileiro · CORS liberado · dados reais</div></div>
-            <i class="ti ti-check" aria-hidden="true" style="font-size:13px;color:var(--g3);margin-left:auto"></i>
+            <span class="tag tag-pncp" style="margin-left:auto">PNCP</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(5,150,105,.2);border-radius:var(--r);background:rgba(5,150,105,.05)">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--g3);flex-shrink:0"></div>
+            <div><div style="font-size:12px;font-weight:500">SIASG — Compras federais</div><div style="font-size:10px;color:var(--t3)">Histórico federal + busca por texto</div></div>
+            <span class="tag tag-siasg" style="margin-left:auto">SIASG</span>
           </div>
         </div>
         <div class="card">
-          <div class="ch"><i class="ti ti-tags" aria-hidden="true"></i> Áreas monitoradas</div>
-          <div style="display:flex;flex-wrap:wrap;gap:5px">
-            <span style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--tech-bg);color:var(--tech-t);border:1px solid rgba(37,99,235,.22)">Tecnologia</span>
-            <span style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--trein-bg);color:var(--trein-t);border:1px solid rgba(5,150,105,.22)">Treinamento</span>
-            <span style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--rh-bg);color:var(--rh-t);border:1px solid rgba(124,58,237,.22)">Programas de RH</span>
+          <div class="ch"><i class="ti ti-tags" aria-hidden="true"></i> Palavras-chave ativas</div>
+          <div style="font-size:11px;color:var(--t3);margin-bottom:8px">
+            Tech: ${KW.tecnologia.peso.length} termos · Treinamento: ${KW.treinamento.peso.length} termos · RH: ${KW.rh.peso.length} termos
           </div>
+          <button class="btns" onclick="abrirKW()" style="width:100%;justify-content:center"><i class="ti ti-tags" aria-hidden="true"></i> Editar palavras-chave</button>
         </div>
       </div>
       <div>
         <div class="card" style="margin-bottom:12px">
           <div class="ch"><i class="ti ti-player-play" aria-hidden="true"></i> Executar</div>
-          <div style="font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.6">Busca editais no PNCP via Cloudflare Worker e classifica automaticamente em <strong style="color:var(--t2)">Tecnologia</strong>, <strong style="color:var(--t2)">Treinamento</strong> e <strong style="color:var(--t2)">Programas de RH</strong>.</div>
+          <div style="font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.6">Busca editais no PNCP + SIASG via Cloudflare Worker e classifica automaticamente usando suas palavras-chave.</div>
           <div style="display:flex;gap:8px">
             <button class="btnp" id="btn-cap" onclick="executarCaptura()"><i class="ti ti-player-play" aria-hidden="true"></i> Capturar agora</button>
             <button class="btns" onclick="setArea('all')"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
@@ -699,26 +873,21 @@ function renderCaptura(){
     </div>`;
 }
 
+// ── EXECUTAR CAPTURA ──────────────────────────────────────────────
 async function executarCaptura(){
   const btn=document.getElementById('btn-cap');
   if(btn)btn.disabled=true;
   const lb=document.getElementById('logbox');
   if(lb)lb.innerHTML='';
-  const log=(msg,n='')=>{
-    if(!lb)return;
-    const el=document.createElement('span');
-    el.className='ll '+n;
-    el.textContent=`[${new Date().toLocaleTimeString('pt-BR')}] ${msg}\n`;
-    lb.appendChild(el);lb.scrollTop=lb.scrollHeight;
-  };
+  const log=(msg,n='')=>{if(!lb)return;const el=document.createElement('span');el.className='ll '+n;el.textContent=`[${new Date().toLocaleTimeString('pt-BR')}] ${msg}\n`;lb.appendChild(el);lb.scrollTop=lb.scrollHeight;};
   const prog=p=>{const el=document.getElementById('pg');if(el)el.style.width=p+'%';};
   log('Conectando ao Worker Cloudflare (IP brasileiro)...','info');
   prog(10);
   try{
-    log('Buscando editais no PNCP...','info');
+    log('Buscando editais no PNCP + SIASG...','info');
     const brutos=await buscarPNCP(3);
     prog(60);
-    log(`PNCP retornou ${brutos.length} editais. Classificando...`,'info');
+    log(`Retornou ${brutos.length} editais. Classificando com suas palavras-chave...`,'info');
     S.editais=[];let tech=0,trein=0,rh=0;
     for(const raw of brutos){
       const item=normalizar(raw);
@@ -746,18 +915,18 @@ async function executarCaptura(){
     document.getElementById('sf-dot').style.background='var(--g2)';
     document.getElementById('sf-txt').textContent=S.editais.length+' oportunidades';
     document.getElementById('sf-ts').textContent='Capturado às '+new Date().toLocaleTimeString('pt-BR');
-  }catch(e){
-    log(`Erro: ${e.message}`,'erro');
-  }
+    atualizarBadgeFav();
+  }catch(e){log(`Erro: ${e.message}`,'erro');}
   if(btn)btn.disabled=false;
   setTimeout(()=>{S.view='dash';setArea('all');},800);
 }
 
+// ── EXPORT CSV ────────────────────────────────────────────────────
 function exportCSV(){
   const d=filtrar();
   if(!d.length){alert('Execute uma captura primeiro.');return;}
-  const h=['Objeto','Órgão','CNPJ','UF','Município','Área','Modalidade','Publicado','Abertura','Encerramento','Valor','Score','Prioridade','Palavras-chave','Link'];
-  const rows=d.map(e=>[e.objeto,e.orgao||'',e.cnpj||'',e.uf||'',e.municipio||'',KW[e.area]?.label||e.area||'',e.modalidade||'',e.data_publicacao||'',e.data_abertura||'',e.data_encerramento||'',e.valor||0,e.score||0,e.prioridade||'',(e.palavras||[]).join('; '),e.link||'']);
+  const h=['Objeto','Órgão','CNPJ','UF','Município','Área','Fonte','Modalidade','Publicado','Abertura','Encerramento','Valor','Score','Prioridade','Palavras-chave','Nota','Link'];
+  const rows=d.map(e=>[e.objeto,e.orgao||'',e.cnpj||'',e.uf||'',e.municipio||'',KW[e.area]?.label||e.area||'',e.fonte||'PNCP',e.modalidade||'',e.data_publicacao||'',e.data_abertura||'',e.data_encerramento||'',e.valor||0,e.score||0,e.prioridade||'',(e.palavras||[]).join('; '),getNota(e.id),e.link||'']);
   const csv=[h,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
   const a=document.createElement('a');
   a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
