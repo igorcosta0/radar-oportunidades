@@ -1006,45 +1006,93 @@ function renderMercadoDados(d){
     </div>`;
 }
 
-async function buscarOrgao(nome){
+function buscarOrgao(nome){
+  // Usa dados já capturados em S.editais — sem nova chamada ao Worker
   const el=document.getElementById('mkt-content');
   if(!el)return;
   const prev=el.innerHTML;
-  el.innerHTML='<div class="mkt-loading"><i class="ti ti-building spin" aria-hidden="true"></i>Carregando perfil do órgão...</div>';
-  try{
-    const r=await fetch(`${WORKER}/orgao?nome=${encodeURIComponent(nome)}`,{signal:AbortSignal.timeout(30000)});
-    if(!r.ok)throw new Error(`HTTP ${r.status}`);
-    const d=await r.json();
-    renderPerfilOrgao(d,prev);
-  }catch(e){
-    el.innerHTML=`<div class="mkt-loading"><i class="ti ti-alert-circle" aria-hidden="true"></i>Erro: ${esc(e.message)}<br><br><button class="btns" onclick="document.getElementById('mkt-content').innerHTML=prev">Voltar</button></div>`;
+
+  // Filtra editais deste órgão
+  const nLow=nome.toLowerCase();
+  const editaisOrgao=S.editais.filter(e=>(e.orgao||'').toLowerCase().includes(nLow));
+
+  if(!editaisOrgao.length){
+    // Avisa que não há dados capturados mas mostra o que temos do histórico
+    const orgInfo=MKT.dados?.top_orgaos?.find(o=>o.nome===nome)||{nome,uf:''};
+    renderPerfilOrgaoLocal({orgao:orgInfo,editais:[]},prev,nome);
+    return;
   }
+
+  // Monta estrutura de dados a partir dos editais locais
+  const valorTotal=editaisOrgao.reduce((s,e)=>s+(e.valor||0),0);
+  const porArea={tecnologia:0,treinamento:0,rh:0,outros:0};
+  for(const e of editaisOrgao){
+    if(e.area==='tecnologia')porArea.tecnologia++;
+    else if(e.area==='treinamento')porArea.treinamento++;
+    else if(e.area==='rh')porArea.rh++;
+    else porArea.outros++;
+  }
+
+  const primeiro=editaisOrgao[0];
+  const d={
+    orgao:{
+      nome:primeiro?.orgao||nome,
+      cnpj:primeiro?.cnpj||'',
+      uf:primeiro?.uf||'',
+      municipio:primeiro?.municipio||'',
+    },
+    total_licitacoes:editaisOrgao.length,
+    valor_total:valorTotal,
+    por_area:porArea,
+    editais:editaisOrgao,
+  };
+
+  renderPerfilOrgaoLocal(d,prev,nome);
 }
 
-function renderPerfilOrgao(d, prev){
+function renderPerfilOrgaoLocal(d,prev,nomeOriginal){
   const el=document.getElementById('mkt-content');
   if(!el)return;
   const org=d.orgao||{};
   const fmt=v=>v?'R$ '+Number(v).toLocaleString('pt-BR',{notation:'compact',maximumFractionDigits:1}):'—';
   const pa=d.por_area||{};
   const total=d.total_licitacoes||0;
+  const editais=d.editais||[];
+
+  // Dados adicionais do histórico Mercado se disponível
+  const orgMkt=MKT.dados?.top_orgaos?.find(o=>o.nome===nomeOriginal);
+  const totalHistorico=orgMkt?.count||0;
+  const valorHistorico=orgMkt?.valor||0;
 
   el.innerHTML=`
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-      <button class="btns" onclick="document.getElementById('mkt-content').innerHTML=arguments[0]" style="padding:6px 10px"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <button class="btns" style="padding:6px 10px"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <div>
         <div style="font-size:14px;font-weight:600;color:var(--t1)">${esc(org.nome||'Órgão')}</div>
-        <div style="font-size:11px;color:var(--t3)">${org.cnpj||''} ${org.municipio?'· '+org.municipio:''} ${org.uf?'· '+org.uf:''}</div>
+        <div style="font-size:11px;color:var(--t3)">${org.cnpj?org.cnpj+' · ':''} ${org.municipio?org.municipio+' · ':''} ${org.uf||''}</div>
       </div>
     </div>
     <div class="mkt-grid">
-      <div class="mkt-card"><div class="mkt-card-label">Licitações (12 meses)</div><div class="mkt-card-value" style="color:var(--b3c)">${total}</div></div>
-      <div class="mkt-card"><div class="mkt-card-label">Volume total</div><div class="mkt-card-value" style="color:var(--g3)">${fmt(d.valor_total)}</div></div>
-      <div class="mkt-card"><div class="mkt-card-label">Ticket médio</div><div class="mkt-card-value" style="color:var(--a3)">${total?fmt((d.valor_total||0)/total):'—'}</div></div>
+      <div class="mkt-card">
+        <div class="mkt-card-label">Editais capturados</div>
+        <div class="mkt-card-value" style="color:var(--b3c)">${total}</div>
+        <div class="mkt-card-sub">na sessão atual</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-card-label">Volume estimado</div>
+        <div class="mkt-card-value" style="color:var(--g3)">${fmt(total?d.valor_total:valorHistorico)}</div>
+        <div class="mkt-card-sub">${total?'editais capturados':'histórico 90 dias'}</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-card-label">No histórico (90d)</div>
+        <div class="mkt-card-value" style="color:var(--a3)">${totalHistorico||total}</div>
+        <div class="mkt-card-sub">editais publicados</div>
+      </div>
     </div>
+    ${total?`
     <div class="mkt-section" style="margin-bottom:12px">
-      <div class="mkt-section-title"><i class="ti ti-tags" aria-hidden="true"></i> Compras por área</div>
-      ${[['tecnologia','Tecnologia','var(--tech-t)','var(--b2c)'],['treinamento','Treinamento','var(--trein-t)','var(--g2)'],['rh','Programas de RH','var(--rh-t)','var(--p2)'],['outros','Outros','var(--t3)','var(--s4)']].map(([k,l,tc,bc])=>{
+      <div class="mkt-section-title"><i class="ti ti-tags" aria-hidden="true"></i> Distribuição por área</div>
+      ${[['tecnologia','Tecnologia','var(--tech-t)','var(--b2c)'],['treinamento','Treinamento','var(--trein-t)','var(--g2)'],['rh','Programas de RH','var(--rh-t)','var(--p2)']].map(([k,l,tc,bc])=>{
         const n=pa[k]||0;const pct=total?Math.round(n/total*100):0;
         return`<div class="mkt-row"><div class="mkt-row-name" style="color:${tc}">${l}</div>
           <div class="mkt-row-bar-wrap" style="width:120px"><div class="mkt-row-bar" style="width:${pct}%;background:${bc}"></div></div>
@@ -1052,24 +1100,32 @@ function renderPerfilOrgao(d, prev){
       }).join('')}
     </div>
     <div class="mkt-section">
-      <div class="mkt-section-title"><i class="ti ti-list" aria-hidden="true"></i> Últimas licitações</div>
+      <div class="mkt-section-title"><i class="ti ti-list" aria-hidden="true"></i> Editais deste órgão</div>
       <div class="mkt-editais">
-        ${(d.editais_recentes||[]).slice(0,8).map(e=>{
-          const val=e.valorTotalEstimado;
-          const dt=(e.dataPublicacaoPncp||'').slice(0,10);
-          const idx=S.editais.findIndex(x=>x.id===e.numeroControlePNCP);
-          return`<div class="mkt-edital" ${idx>=0?`onclick="abrirModal(${idx})"`:''}>
-            <div class="mkt-edital-obj">${esc((e.objetoCompra||'').slice(0,100))}</div>
+        ${editais.slice(0,10).map(e=>{
+          const idx=S.editais.indexOf(e);
+          return`<div class="mkt-edital" onclick="abrirModal(${idx})">
+            <div class="mkt-edital-obj">${esc((e.objeto||'').slice(0,100))}${(e.objeto||'').length>100?'…':''}</div>
             <div class="mkt-edital-meta">
-              ${val?`<span style="color:var(--g3)">R$ ${Number(val).toLocaleString('pt-BR',{minimumFractionDigits:2})}</span>`:''}
-              ${dt?`<span>${dt}</span>`:''}
+              ${e.area?`<span style="color:${e.area==='tecnologia'?'var(--tech-t)':e.area==='treinamento'?'var(--trein-t)':'var(--rh-t)'}">
+                ${KW[e.area]?.label||e.area}</span>`:''}
+              ${e.valor?`<span style="color:var(--g3)">R$ ${Number(e.valor).toLocaleString('pt-BR',{minimumFractionDigits:2})}</span>`:''}
+              ${e.data_publicacao?`<span>${e.data_publicacao}</span>`:''}
+              <span class="tag ${e.prioridade==='Alta'?'pA':e.prioridade==='Média'?'pM':'pB'}" style="font-size:9px;padding:1px 6px">${e.prioridade}</span>
             </div>
           </div>`;
         }).join('')}
       </div>
-    </div>`;
+    </div>`:`
+    <div class="mkt-section">
+      <div style="font-size:12px;color:var(--t3);text-align:center;padding:20px">
+        <i class="ti ti-info-circle" aria-hidden="true" style="font-size:24px;display:block;margin-bottom:8px;opacity:.3"></i>
+        Este órgão aparece no histórico do PNCP mas não tem editais<br>na sessão atual. Faça uma nova captura para ver os detalhes.
+        <br><br>
+        <button class="btns" onclick="setView('captura')"><i class="ti ti-refresh" aria-hidden="true"></i> Capturar editais</button>
+      </div>
+    </div>`}`;
 
-  // Fix back button
   el.querySelector('button').onclick=()=>{el.innerHTML=prev;};
 }
 
