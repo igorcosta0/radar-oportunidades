@@ -202,6 +202,36 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
 .kw-add{display:flex;gap:7px;}
 .kw-footer{padding:12px 18px;border-top:1px solid var(--b1);display:flex;justify-content:flex-end;gap:8px;}
 
+
+/* ── MERCADO ─────────────────────────────────────────────────── */
+.mkt-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.mkt-tab{padding:6px 14px;border-radius:var(--r);border:1px solid var(--b1);background:none;color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all .12s}
+.mkt-tab:hover{background:var(--s2);color:var(--t1)}
+.mkt-tab.active{border-color:var(--b2c);background:var(--tech-bg);color:var(--tech-t)}
+.mkt-tab.active.trein{border-color:rgba(5,150,105,.4);background:var(--trein-bg);color:var(--trein-t)}
+.mkt-tab.active.rh{border-color:rgba(124,58,237,.4);background:var(--rh-bg);color:var(--rh-t)}
+.mkt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.mkt-card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:14px}
+.mkt-card-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;font-weight:500}
+.mkt-card-value{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.mkt-card-sub{font-size:10px;color:var(--t3);margin-top:4px}
+.mkt-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.mkt-section{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rl);padding:13px}
+.mkt-section-title{font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;display:flex;align-items:center;gap:5px}
+.mkt-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--b1)}
+.mkt-row:last-child{border-bottom:none}
+.mkt-row-name{flex:1;font-size:11px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mkt-row-bar-wrap{width:80px;height:4px;background:var(--s4);border-radius:2px;overflow:hidden}
+.mkt-row-bar{height:4px;border-radius:2px}
+.mkt-row-val{font-size:10px;color:var(--t3);min-width:36px;text-align:right}
+.mkt-row-count{font-size:10px;font-weight:600;color:var(--t3);min-width:22px;text-align:right}
+.mkt-editais{display:flex;flex-direction:column;gap:6px}
+.mkt-edital{background:var(--s3);border:1px solid var(--b1);border-radius:var(--r);padding:10px 12px;cursor:pointer;transition:border-color .12s}
+.mkt-edital:hover{border-color:var(--b2)}
+.mkt-edital-obj{font-size:11px;color:var(--t1);font-weight:500;margin-bottom:3px;line-height:1.4}
+.mkt-edital-meta{font-size:10px;color:var(--t3);display:flex;gap:8px;flex-wrap:wrap}
+.mkt-loading{text-align:center;padding:40px;color:var(--t3)}
+.mkt-loading i{font-size:28px;display:block;margin-bottom:8px;opacity:.3}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin .7s linear infinite;display:inline-block}
 @keyframes fi{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
@@ -222,6 +252,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
     <button class="nb"        id="nb-trein" onclick="setArea('trein')"><i class="ti ti-school"             style="font-size:15px" aria-hidden="true"></i> Treinamento     <span class="nba" id="na-trein" style="background:var(--g2)">0</span></button>
     <button class="nb"        id="nb-rh"    onclick="setArea('rh')">   <i class="ti ti-users"             style="font-size:15px" aria-hidden="true"></i> Programas de RH <span class="nba" id="na-rh"    style="background:var(--p2)">0</span></button>
     <button class="nb"        id="nb-fav"   onclick="setArea('fav')">  <i class="ti ti-bookmark"          style="font-size:15px" aria-hidden="true"></i> Salvos          <span class="nba" id="na-fav"   style="background:var(--a2)">0</span></button>
+    <button class="nb"        id="nb-mkt"   onclick="setArea('mkt')">  <i class="ti ti-chart-line"        style="font-size:15px" aria-hidden="true"></i> Mercado         </button>
   </div>
   <div class="sep"></div>
   <div style="padding:0 0 4px">
@@ -242,6 +273,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;font-size:1
     <button class="at"       id="tab-trein" onclick="setArea('trein')"><i class="ti ti-school"             style="font-size:13px" aria-hidden="true"></i> Treinamento</button>
     <button class="at"       id="tab-rh"    onclick="setArea('rh')">   <i class="ti ti-users"             style="font-size:13px" aria-hidden="true"></i> Programas de RH</button>
     <button class="at"       id="tab-fav"   onclick="setArea('fav')">  <i class="ti ti-bookmark"          style="font-size:13px" aria-hidden="true"></i> Salvos</button>
+    <button class="at"       id="tab-mkt"   onclick="setArea('mkt')">  <i class="ti ti-chart-line"        style="font-size:13px" aria-hidden="true"></i> Mercado</button>
     <div class="sp"></div>
     <div class="sw">
       <i class="ti ti-search" style="font-size:13px;color:var(--t3)" aria-hidden="true"></i>
@@ -449,21 +481,22 @@ const ACFG={
   trein:{label:'Treinamento',  c:'var(--g2)', bg:'var(--trein-bg)',      t:'var(--trein-t)',icon:'ti-school'},
   rh:  {label:'Programas de RH',c:'var(--p2)',bg:'var(--rh-bg)',         t:'var(--rh-t)', icon:'ti-users'},
   fav: {label:'Salvos',        c:'var(--a2)', bg:'rgba(245,158,11,.12)', t:'var(--a3)',    icon:'ti-bookmark'},
+  mkt: {label:'Mercado',        c:'var(--b2c)',bg:'rgba(37,99,235,.12)',  t:'var(--b3c)',  icon:'ti-chart-line'},
 };
 
 renderDash();
 
 function setArea(a){
   S.area=a;S.pagina=1;S.view='dash';
-  ['all','tech','trein','rh','fav'].forEach(k=>{
+  ['all','tech','trein','rh','fav','mkt'].forEach(k=>{
     const nb=document.getElementById('nb-'+k);
     const tb=document.getElementById('tab-'+k);
     if(nb)nb.className='nb'+(k===a?' a-'+a:'');
     if(tb)tb.className='at'+(k===a?' t'+a:'');
   });
-  renderDash();
+  if(a==='mkt')renderMercado();else renderDash();
 }
-function setView(v){S.view=v;v==='captura'?renderCaptura():renderDash();}
+function setView(v){S.view=v;if(v==='captura')renderCaptura();else if(v==='mkt'||S.area==='mkt')renderMercado();else renderDash();}
 
 const AREA_MAP={tech:'tecnologia',trein:'treinamento',rh:'rh'};
 
@@ -822,6 +855,224 @@ function renderBarras(){
 }
 
 // ── RENDER CAPTURA ────────────────────────────────────────────────
+
+// ── MERCADO ───────────────────────────────────────────────────────
+const MKT = { area:'tecnologia', dados:null, loading:false };
+
+async function renderMercado(){
+  const ct=document.getElementById('ct');
+  if(!ct)return;
+
+  const areaCfg={
+    tecnologia:{label:'Tecnologia',c:'var(--tech-t)',cls:''},
+    treinamento:{label:'Treinamento',c:'var(--trein-t)',cls:'trein'},
+    rh:{label:'Programas de RH',c:'var(--rh-t)',cls:'rh'},
+  };
+
+  ct.innerHTML=`
+    <div class="ah">
+      <div class="ab2" style="background:rgba(37,99,235,.12);color:var(--b3c)"><i class="ti ti-chart-line" aria-hidden="true" style="font-size:14px"></i> Inteligência de Mercado B2G</div>
+      <span class="ah-tit">Análise histórica do PNCP</span>
+    </div>
+    <div class="mkt-tabs">
+      ${Object.entries(areaCfg).map(([k,v])=>`<button class="mkt-tab${MKT.area===k?' active '+v.cls:''}" onclick="mudarAreaMkt('${k}')">${v.label}</button>`).join('')}
+      <button class="btns" style="margin-left:auto" onclick="carregarMercado()"><i class="ti ti-refresh" aria-hidden="true"></i> Atualizar</button>
+    </div>
+    <div id="mkt-content">
+      <div class="mkt-loading"><i class="ti ti-chart-line spin" aria-hidden="true"></i>Carregando dados de mercado...</div>
+    </div>`;
+
+  await carregarMercado();
+}
+
+async function mudarAreaMkt(area){
+  MKT.area=area;
+  MKT.dados=null;
+  await renderMercado();
+}
+
+async function carregarMercado(){
+  const el=document.getElementById('mkt-content');
+  if(!el)return;
+  el.innerHTML='<div class="mkt-loading"><i class="ti ti-chart-line spin" aria-hidden="true"></i>Buscando dados históricos do PNCP...</div>';
+
+  try{
+    const r=await fetch(`${WORKER}/historico?area=${MKT.area}&dias=90`,{signal:AbortSignal.timeout(30000)});
+    if(!r.ok)throw new Error(`HTTP ${r.status}`);
+    const d=await r.json();
+    MKT.dados=d;
+    renderMercadoDados(d);
+  }catch(e){
+    el.innerHTML=`<div class="mkt-loading"><i class="ti ti-alert-circle" aria-hidden="true"></i>Erro ao carregar: ${esc(e.message)}<br><br><button class="btns" onclick="carregarMercado()">Tentar novamente</button></div>`;
+  }
+}
+
+function renderMercadoDados(d){
+  const el=document.getElementById('mkt-content');
+  if(!el)return;
+
+  const fmt=v=>v?'R$ '+Number(v).toLocaleString('pt-BR',{notation:'compact',maximumFractionDigits:1}):'—';
+  const fmtFull=v=>v?'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2}):'—';
+
+  // Top órgãos
+  const topOrgaos=d.top_orgaos||[];
+  const maxCount=Math.max(...topOrgaos.map(o=>o.count),1);
+
+  // Por UF
+  const porUf=Object.entries(d.por_uf||{}).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const maxUf=Math.max(...porUf.map(u=>u[1]),1);
+
+  // Por mês
+  const porMes=Object.entries(d.por_mes||{}).sort((a,b)=>a[0].localeCompare(b[0])).slice(-6);
+  const maxMes=Math.max(...porMes.map(m=>m[1]),1);
+
+  // Editais recentes
+  const editais=(d.editais||[]).slice(0,8);
+
+  el.innerHTML=`
+    <div class="mkt-grid">
+      <div class="mkt-card">
+        <div class="mkt-card-label">Editais (90 dias)</div>
+        <div class="mkt-card-value" style="color:var(--b3c)">${(d.total||0).toLocaleString('pt-BR')}</div>
+        <div class="mkt-card-sub">publicados no PNCP na área</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-card-label">Volume total</div>
+        <div class="mkt-card-value" style="color:var(--g3)">${fmt(d.valor_total)}</div>
+        <div class="mkt-card-sub">em valor estimado</div>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-card-label">Ticket médio</div>
+        <div class="mkt-card-value" style="color:var(--a3)">${fmt(d.ticket_medio)}</div>
+        <div class="mkt-card-sub">por edital</div>
+      </div>
+    </div>
+
+    <div class="mkt-cols">
+      <div class="mkt-section">
+        <div class="mkt-section-title"><i class="ti ti-building" aria-hidden="true"></i> Órgãos que mais compram</div>
+        ${topOrgaos.length?topOrgaos.map(o=>`
+          <div class="mkt-row" onclick="buscarOrgao('${esc(o.nome.replace(/'/g,"\'"))}')">
+            <div class="mkt-row-name" title="${esc(o.nome)}">${esc(o.nome.length>32?o.nome.slice(0,30)+'…':o.nome)}${o.uf?' <span style="color:var(--t3)">'+o.uf+'</span>':''}</div>
+            <div class="mkt-row-bar-wrap"><div class="mkt-row-bar" style="width:${Math.round(o.count/maxCount*100)}%;background:var(--b2c)"></div></div>
+            <div class="mkt-row-count">${o.count}</div>
+            <div class="mkt-row-val">${fmt(o.valor)}</div>
+          </div>`).join(''):'<div style="font-size:11px;color:var(--t3)">Sem dados</div>'}
+      </div>
+
+      <div class="mkt-section">
+        <div class="mkt-section-title"><i class="ti ti-map" aria-hidden="true"></i> Distribuição por estado</div>
+        ${porUf.length?porUf.map(([uf,n])=>`
+          <div class="mkt-row">
+            <div class="mkt-row-name">${uf}</div>
+            <div class="mkt-row-bar-wrap"><div class="mkt-row-bar" style="width:${Math.round(n/maxUf*100)}%;background:var(--g2)"></div></div>
+            <div class="mkt-row-count">${n}</div>
+          </div>`).join(''):'<div style="font-size:11px;color:var(--t3)">Sem dados</div>'}
+      </div>
+    </div>
+
+    <div class="mkt-section" style="margin-bottom:12px">
+      <div class="mkt-section-title"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Volume mensal (últimos 6 meses)</div>
+      <div style="display:flex;align-items:flex-end;gap:6px;height:60px;padding-top:8px">
+        ${porMes.map(([mes,n])=>`
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">
+            <div style="font-size:9px;color:var(--t3)">${n}</div>
+            <div style="width:100%;background:var(--b2c);border-radius:2px 2px 0 0;opacity:.8;height:${Math.round(n/maxMes*44)+4}px"></div>
+            <div style="font-size:9px;color:var(--t3)">${mes.slice(5)}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="mkt-section">
+      <div class="mkt-section-title"><i class="ti ti-list" aria-hidden="true"></i> Editais recentes na área</div>
+      <div class="mkt-editais">
+        ${editais.map((e,i)=>{
+          const org=e.orgaoEntidade?.razaoSocial||e.unidadeOrgao?.nomeUnidade||'';
+          const uf=e.unidadeOrgao?.ufSigla||'';
+          const val=e.valorTotalEstimado;
+          const dt=(e.dataPublicacaoPncp||'').slice(0,10);
+          const idx=S.editais.findIndex(x=>x.id===e.numeroControlePNCP);
+          return`<div class="mkt-edital" ${idx>=0?`onclick="abrirModal(${idx})"`:''}>
+            <div class="mkt-edital-obj">${esc((e.objetoCompra||'').slice(0,100))}${(e.objetoCompra||'').length>100?'…':''}</div>
+            <div class="mkt-edital-meta">
+              <span>${esc(org.slice(0,40))}${org.length>40?'…':''}</span>
+              ${uf?`<span>${uf}</span>`:''}
+              ${val?`<span style="color:var(--g3)">${fmtFull(val)}</span>`:''}
+              ${dt?`<span>${dt}</span>`:''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
+async function buscarOrgao(nome){
+  const el=document.getElementById('mkt-content');
+  if(!el)return;
+  const prev=el.innerHTML;
+  el.innerHTML='<div class="mkt-loading"><i class="ti ti-building spin" aria-hidden="true"></i>Carregando perfil do órgão...</div>';
+  try{
+    const r=await fetch(`${WORKER}/orgao?nome=${encodeURIComponent(nome)}`,{signal:AbortSignal.timeout(30000)});
+    if(!r.ok)throw new Error(`HTTP ${r.status}`);
+    const d=await r.json();
+    renderPerfilOrgao(d,prev);
+  }catch(e){
+    el.innerHTML=`<div class="mkt-loading"><i class="ti ti-alert-circle" aria-hidden="true"></i>Erro: ${esc(e.message)}<br><br><button class="btns" onclick="document.getElementById('mkt-content').innerHTML=prev">Voltar</button></div>`;
+  }
+}
+
+function renderPerfilOrgao(d, prev){
+  const el=document.getElementById('mkt-content');
+  if(!el)return;
+  const org=d.orgao||{};
+  const fmt=v=>v?'R$ '+Number(v).toLocaleString('pt-BR',{notation:'compact',maximumFractionDigits:1}):'—';
+  const pa=d.por_area||{};
+  const total=d.total_licitacoes||0;
+
+  el.innerHTML=`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <button class="btns" onclick="document.getElementById('mkt-content').innerHTML=arguments[0]" style="padding:6px 10px"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--t1)">${esc(org.nome||'Órgão')}</div>
+        <div style="font-size:11px;color:var(--t3)">${org.cnpj||''} ${org.municipio?'· '+org.municipio:''} ${org.uf?'· '+org.uf:''}</div>
+      </div>
+    </div>
+    <div class="mkt-grid">
+      <div class="mkt-card"><div class="mkt-card-label">Licitações (12 meses)</div><div class="mkt-card-value" style="color:var(--b3c)">${total}</div></div>
+      <div class="mkt-card"><div class="mkt-card-label">Volume total</div><div class="mkt-card-value" style="color:var(--g3)">${fmt(d.valor_total)}</div></div>
+      <div class="mkt-card"><div class="mkt-card-label">Ticket médio</div><div class="mkt-card-value" style="color:var(--a3)">${total?fmt((d.valor_total||0)/total):'—'}</div></div>
+    </div>
+    <div class="mkt-section" style="margin-bottom:12px">
+      <div class="mkt-section-title"><i class="ti ti-tags" aria-hidden="true"></i> Compras por área</div>
+      ${[['tecnologia','Tecnologia','var(--tech-t)','var(--b2c)'],['treinamento','Treinamento','var(--trein-t)','var(--g2)'],['rh','Programas de RH','var(--rh-t)','var(--p2)'],['outros','Outros','var(--t3)','var(--s4)']].map(([k,l,tc,bc])=>{
+        const n=pa[k]||0;const pct=total?Math.round(n/total*100):0;
+        return`<div class="mkt-row"><div class="mkt-row-name" style="color:${tc}">${l}</div>
+          <div class="mkt-row-bar-wrap" style="width:120px"><div class="mkt-row-bar" style="width:${pct}%;background:${bc}"></div></div>
+          <div class="mkt-row-count">${n}</div><div class="mkt-row-val">${pct}%</div></div>`;
+      }).join('')}
+    </div>
+    <div class="mkt-section">
+      <div class="mkt-section-title"><i class="ti ti-list" aria-hidden="true"></i> Últimas licitações</div>
+      <div class="mkt-editais">
+        ${(d.editais_recentes||[]).slice(0,8).map(e=>{
+          const val=e.valorTotalEstimado;
+          const dt=(e.dataPublicacaoPncp||'').slice(0,10);
+          const idx=S.editais.findIndex(x=>x.id===e.numeroControlePNCP);
+          return`<div class="mkt-edital" ${idx>=0?`onclick="abrirModal(${idx})"`:''}>
+            <div class="mkt-edital-obj">${esc((e.objetoCompra||'').slice(0,100))}</div>
+            <div class="mkt-edital-meta">
+              ${val?`<span style="color:var(--g3)">R$ ${Number(val).toLocaleString('pt-BR',{minimumFractionDigits:2})}</span>`:''}
+              ${dt?`<span>${dt}</span>`:''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+
+  // Fix back button
+  el.querySelector('button').onclick=()=>{el.innerHTML=prev;};
+}
+
 function renderCaptura(){
   document.getElementById('ct').innerHTML=`
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
